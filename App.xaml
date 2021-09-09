@@ -4,16 +4,27 @@
              xmlns:local="clr-namespace:RetailRentingApp"
              StartupUri="Windows/LoginWindow.xaml">
     <Application.Resources>
+        <!--Styles for app.-->
         <Style TargetType="TextBlock" x:Key="CommonBlock">
             <Setter Property="Margin" Value="5" />
             <Setter Property="TextAlignment" Value="Right" />
             <Setter Property="Width" Value="150" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Width" Value="150" />
         </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
         <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Width" Value="150" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="PasswordBox">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Width" Value="150" />
             <Setter Property="VerticalContentAlignment" Value="Center" />

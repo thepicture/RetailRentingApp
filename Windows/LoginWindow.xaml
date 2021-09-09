@@ -5,7 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetailRentingApp"
         mc:Ignorable="d"
-        Title="Авторизация" Height="450" Width="800">
+        Title="Авторизация"
+        Height="250"
+        Width="400"
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Имя пользователя"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                <ComboBox Name="ComboLogin"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Пароль"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                <Grid Name="PasswordShowGrid">
+                    <PasswordBox Name="PBoxPasswordSecure"></PasswordBox>
+                    <TextBox Name="TBoxPasswordInsecure"
+                             Visibility="Collapsed"></TextBox>
+                </Grid>
+            </StackPanel>
+            <CheckBox Name="CheckPasswordBox"
+                      Content="Показать пароль"
+                      Click="CheckPasswordBox_Click"></CheckBox>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Войти"
+                        Name="BtnLogin"
+                        Click="BtnLogin_Click"></Button>
+                <Button Content="Выход"
+                        Name="BtnExit"
+                        Click="BtnExit_Click"></Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
