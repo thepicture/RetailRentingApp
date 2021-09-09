@@ -111,6 +111,7 @@
     <Compile Include="Backend\User.cs">
       <DependentUpon>RetailRentingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\AppData.cs" />
     <Compile Include="Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -151,7 +152,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes\" />
     <Folder Include="Resources\Images\" />
   </ItemGroup>
   <ItemGroup>
