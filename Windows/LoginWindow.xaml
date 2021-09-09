@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Title="Авторизация"
         Height="250"
-        Width="400"
-        WindowStartupLocation="CenterScreen">
+        Width="500"
+        WindowStartupLocation="CenterScreen"  
+        MinWidth="500"
+        MinHeight="250">
     <Grid>
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
