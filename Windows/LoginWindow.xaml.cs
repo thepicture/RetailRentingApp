@@ -25,7 +25,7 @@ namespace RetailRentingApp
         {
             if (ComboLogin.SelectedItem is User currentUser)
             {
-                if (currentUser.Password == currentUser.Password)
+                if (PBoxPasswordSecure.Password == currentUser.Password)
                 {
                     ShowAllIsOkMessageFor(currentUser);
                     InitializeWindowFor(currentUser);
