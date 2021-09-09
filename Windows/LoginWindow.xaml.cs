@@ -1,4 +1,6 @@
-﻿using RetailRentingApp.Classes;
+﻿using RetailRentingApp.Backend;
+using RetailRentingApp.Classes;
+using System;
 using System.Linq;
 using System.Windows;
 
@@ -21,7 +23,39 @@ namespace RetailRentingApp
         /// </summary>
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
+            if (ComboLogin.SelectedItem is User currentUser)
+            {
+                if (currentUser.Password == currentUser.Password)
+                {
+                    ShowAllIsOkMessageFor(currentUser);
+                    InitializeWindowFor(currentUser);
+                }
+                else
+                {
+                    ShowSomethingWentWrongMessage();
+                }
+            }
+        }
 
+        private void InitializeWindowFor(User currentUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ShowSomethingWentWrongMessage()
+        {
+            MessageBox.Show("Неверный пароль. Пожалуйста, введите корректный пароль",
+                     "Ошибка авторизации",
+                     MessageBoxButton.OK,
+                     MessageBoxImage.Warning);
+        }
+
+        private void ShowAllIsOkMessageFor(User currentUser)
+        {
+            MessageBox.Show("Добро пожаловать, " + currentUser.ToString() + "!",
+                        "Авторизация успешна!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -35,6 +69,9 @@ namespace RetailRentingApp
             }
         }
 
+        /// <summary>
+        /// Resolves the current password visibility state with respect to the CheckBox.
+        /// </summary>
         private void CheckPasswordBox_Click(object sender, RoutedEventArgs e)
         {
             if (CheckPasswordBox.IsChecked == true)
