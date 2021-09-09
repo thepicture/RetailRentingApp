@@ -72,46 +72,47 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Backend\BaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\BaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\BaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Backend\Cheque.cs">
-      <DependentUpon>RetailRentingModel.tt</DependentUpon>
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Backend\Customer.cs">
-      <DependentUpon>RetailRentingModel.tt</DependentUpon>
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Backend\PhoneNumberOfCustomer.cs">
-      <DependentUpon>RetailRentingModel.tt</DependentUpon>
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Backend\Renting.cs">
-      <DependentUpon>RetailRentingModel.tt</DependentUpon>
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Backend\RetailRentingModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RetailRentingModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Backend\RetailRentingModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RetailRentingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Backend\RetailRentingModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RetailRentingModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Backend\sysdiagram.cs">
-      <DependentUpon>RetailRentingModel.tt</DependentUpon>
+    <Compile Include="Backend\sysdiagrams.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Backend\TradingArea.cs">
-      <DependentUpon>RetailRentingModel.tt</DependentUpon>
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Backend\TypeOfUser.cs">
-      <DependentUpon>RetailRentingModel.tt</DependentUpon>
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Backend\User.cs">
-      <DependentUpon>RetailRentingModel.tt</DependentUpon>
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\AppData.cs" />
+    <Compile Include="Classes\PartialUser.cs" />
     <Compile Include="Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -135,12 +136,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Backend\RetailRentingModel.edmx">
+    <EntityDeploy Include="Backend\BaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RetailRentingModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>BaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Backend\RetailRentingModel.edmx.diagram">
-      <DependentUpon>RetailRentingModel.edmx</DependentUpon>
+    <None Include="Backend\BaseModel.edmx.diagram">
+      <DependentUpon>BaseModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -155,19 +156,19 @@
     <Folder Include="Resources\Images\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Backend\RetailRentingModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RetailRentingModel.Context.cs</LastGenOutput>
-      <DependentUpon>RetailRentingModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Backend\RetailRentingModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RetailRentingModel.edmx</DependentUpon>
-      <LastGenOutput>RetailRentingModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Backend\BaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Backend\BaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

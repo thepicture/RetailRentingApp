@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2f22200232d149e5bfa428f397cedf6b" Name="Diagram1">
+      <Diagram DiagramId="85639ab9e91842e69fd07852e6b9cad4" Name="Diagram1">
         <EntityTypeShape EntityType="BaseModel.Cheque" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BaseModel.Customer" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="BaseModel.PhoneNumberOfCustomer" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BaseModel.Renting" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.sysdiagram" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BaseModel.TradingArea" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BaseModel.TypeOfUser" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="BaseModel.User" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />

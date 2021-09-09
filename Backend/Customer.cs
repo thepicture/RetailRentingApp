@@ -17,9 +17,9 @@ namespace RetailRentingApp.Backend
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.PhoneNumberOfCustomers = new HashSet<PhoneNumberOfCustomer>();
-            this.Cheques = new HashSet<Cheque>();
-            this.Rentings = new HashSet<Renting>();
+            this.PhoneNumberOfCustomer = new HashSet<PhoneNumberOfCustomer>();
+            this.Cheque = new HashSet<Cheque>();
+            this.Renting = new HashSet<Renting>();
         }
     
         public int CustomerId { get; set; }
@@ -32,10 +32,10 @@ namespace RetailRentingApp.Backend
         public byte[] ImageOfCustomer { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhoneNumberOfCustomer> PhoneNumberOfCustomers { get; set; }
+        public virtual ICollection<PhoneNumberOfCustomer> PhoneNumberOfCustomer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cheque> Cheques { get; set; }
+        public virtual ICollection<Cheque> Cheque { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Renting> Rentings { get; set; }
+        public virtual ICollection<Renting> Renting { get; set; }
     }
 }

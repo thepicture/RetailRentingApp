@@ -17,7 +17,7 @@ namespace RetailRentingApp.Backend
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TradingArea()
         {
-            this.Rentings = new HashSet<Renting>();
+            this.Renting = new HashSet<Renting>();
         }
     
         public int TradingAreaId { get; set; }
@@ -28,6 +28,6 @@ namespace RetailRentingApp.Backend
         public byte[] Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Renting> Rentings { get; set; }
+        public virtual ICollection<Renting> Renting { get; set; }
     }
 }

@@ -15,8 +15,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Имя пользователя"
                            Style="{StaticResource CommonBlock}"></TextBlock>
-                <ComboBox Name="ComboLogin"
-                          DisplayMemberPath="UserCredentials"></ComboBox>
+                <ComboBox Name="ComboLogin"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Пароль"

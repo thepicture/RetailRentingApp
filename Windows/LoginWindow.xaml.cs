@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RetailRentingApp.Classes;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using RetailRentingApp.Classes;
 
 namespace RetailRentingApp
 {
@@ -24,10 +12,8 @@ namespace RetailRentingApp
         public LoginWindow()
         {
             InitializeComponent();
-            ComboLogin.ItemsSource = AppData.Context.Users.ToList().Select(u =>
-            {
-                return u.LastName + " " + u.MiddleName + " " + u.FirstName;
-            });
+
+            ComboLogin.ItemsSource = AppData.Context.User.ToList();
         }
 
         /// <summary>

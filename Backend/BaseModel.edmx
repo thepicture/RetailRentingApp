@@ -259,7 +259,7 @@
           <Property Name="ChequeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PayDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SumOfPaying" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Customers" Relationship="Self.ChequeOfCustomer" FromRole="Cheque" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="Self.ChequeOfCustomer" FromRole="Cheque" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -273,9 +273,9 @@
           <Property Name="ContactFaceLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactFaceMiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ImageOfCustomer" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="PhoneNumberOfCustomers" Relationship="Self.FK_PhoneNumberOfCustomer_Customer" FromRole="Customer" ToRole="PhoneNumberOfCustomer" />
-          <NavigationProperty Name="Cheques" Relationship="Self.ChequeOfCustomer" FromRole="Customer" ToRole="Cheque" />
-          <NavigationProperty Name="Rentings" Relationship="Self.RentingOfCustomer" FromRole="Customer" ToRole="Renting" />
+          <NavigationProperty Name="PhoneNumberOfCustomer" Relationship="Self.FK_PhoneNumberOfCustomer_Customer" FromRole="Customer" ToRole="PhoneNumberOfCustomer" />
+          <NavigationProperty Name="Cheque" Relationship="Self.ChequeOfCustomer" FromRole="Customer" ToRole="Cheque" />
+          <NavigationProperty Name="Renting" Relationship="Self.RentingOfCustomer" FromRole="Customer" ToRole="Renting" />
         </EntityType>
         <EntityType Name="PhoneNumberOfCustomer">
           <Key>
@@ -293,10 +293,10 @@
           <Property Name="RentingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Customers" Relationship="Self.RentingOfCustomer" FromRole="Renting" ToRole="Customer" />
-          <NavigationProperty Name="TradingAreas" Relationship="Self.RentingOfTradingArea" FromRole="Renting" ToRole="TradingArea" />
+          <NavigationProperty Name="Customer" Relationship="Self.RentingOfCustomer" FromRole="Renting" ToRole="Customer" />
+          <NavigationProperty Name="TradingArea" Relationship="Self.RentingOfTradingArea" FromRole="Renting" ToRole="TradingArea" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -316,7 +316,7 @@
           <Property Name="IsAirVenting" Type="Boolean" Nullable="false" />
           <Property Name="CostPerDay" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Rentings" Relationship="Self.RentingOfTradingArea" FromRole="TradingArea" ToRole="Renting" />
+          <NavigationProperty Name="Renting" Relationship="Self.RentingOfTradingArea" FromRole="TradingArea" ToRole="Renting" />
         </EntityType>
         <EntityType Name="TypeOfUser">
           <Key>
@@ -324,7 +324,7 @@
           </Key>
           <Property Name="TypeOfUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_TypeOfUser" FromRole="TypeOfUser" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_TypeOfUser" FromRole="TypeOfUser" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -376,33 +376,33 @@
           <End Role="TradingArea" Type="Self.TradingArea" Multiplicity="*" />
         </Association>
         <EntityContainer Name="RetailRentingBaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cheques" EntityType="Self.Cheque" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="PhoneNumberOfCustomers" EntityType="Self.PhoneNumberOfCustomer" />
-          <EntitySet Name="Rentings" EntityType="Self.Renting" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="TradingAreas" EntityType="Self.TradingArea" />
-          <EntitySet Name="TypeOfUsers" EntityType="Self.TypeOfUser" />
-          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Cheque" EntityType="Self.Cheque" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="PhoneNumberOfCustomer" EntityType="Self.PhoneNumberOfCustomer" />
+          <EntitySet Name="Renting" EntityType="Self.Renting" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TradingArea" EntityType="Self.TradingArea" />
+          <EntitySet Name="TypeOfUser" EntityType="Self.TypeOfUser" />
+          <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_PhoneNumberOfCustomer_Customer" Association="Self.FK_PhoneNumberOfCustomer_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="PhoneNumberOfCustomer" EntitySet="PhoneNumberOfCustomers" />
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="PhoneNumberOfCustomer" EntitySet="PhoneNumberOfCustomer" />
           </AssociationSet>
           <AssociationSet Name="FK_User_TypeOfUser" Association="Self.FK_User_TypeOfUser">
-            <End Role="TypeOfUser" EntitySet="TypeOfUsers" />
-            <End Role="User" EntitySet="Users" />
+            <End Role="TypeOfUser" EntitySet="TypeOfUser" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="ChequeOfCustomer" Association="Self.ChequeOfCustomer">
-            <End Role="Cheque" EntitySet="Cheques" />
-            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Cheque" EntitySet="Cheque" />
+            <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
           <AssociationSet Name="RentingOfCustomer" Association="Self.RentingOfCustomer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Renting" EntitySet="Rentings" />
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Renting" EntitySet="Renting" />
           </AssociationSet>
           <AssociationSet Name="RentingOfTradingArea" Association="Self.RentingOfTradingArea">
-            <End Role="Renting" EntitySet="Rentings" />
-            <End Role="TradingArea" EntitySet="TradingAreas" />
+            <End Role="Renting" EntitySet="Renting" />
+            <End Role="TradingArea" EntitySet="TradingArea" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -411,7 +411,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BaseModelStoreContainer" CdmEntityContainer="RetailRentingBaseEntities">
-          <EntitySetMapping Name="Cheques">
+          <EntitySetMapping Name="Cheque">
             <EntityTypeMapping TypeName="BaseModel.Cheque">
               <MappingFragment StoreEntitySet="Cheque">
                 <ScalarProperty Name="ChequeId" ColumnName="ChequeId" />
@@ -420,7 +420,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
+          <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="BaseModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
@@ -434,7 +434,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PhoneNumberOfCustomers">
+          <EntitySetMapping Name="PhoneNumberOfCustomer">
             <EntityTypeMapping TypeName="BaseModel.PhoneNumberOfCustomer">
               <MappingFragment StoreEntitySet="PhoneNumberOfCustomer">
                 <ScalarProperty Name="PhoneId" ColumnName="PhoneId" />
@@ -443,7 +443,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rentings">
+          <EntitySetMapping Name="Renting">
             <EntityTypeMapping TypeName="BaseModel.Renting">
               <MappingFragment StoreEntitySet="Renting">
                 <ScalarProperty Name="RentingId" ColumnName="RentingId" />
@@ -453,7 +453,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="BaseModel.sysdiagram">
+            <EntityTypeMapping TypeName="BaseModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -463,7 +463,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TradingAreas">
+          <EntitySetMapping Name="TradingArea">
             <EntityTypeMapping TypeName="BaseModel.TradingArea">
               <MappingFragment StoreEntitySet="TradingArea">
                 <ScalarProperty Name="TradingAreaId" ColumnName="TradingAreaId" />
@@ -475,7 +475,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TypeOfUsers">
+          <EntitySetMapping Name="TypeOfUser">
             <EntityTypeMapping TypeName="BaseModel.TypeOfUser">
               <MappingFragment StoreEntitySet="TypeOfUser">
                 <ScalarProperty Name="TypeOfUserId" ColumnName="TypeOfUserId" />
@@ -483,7 +483,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
+          <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="BaseModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -534,7 +534,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
