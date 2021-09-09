@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RetailRentingApp.Classes;
 
 namespace RetailRentingApp
 {
@@ -23,6 +24,10 @@ namespace RetailRentingApp
         public LoginWindow()
         {
             InitializeComponent();
+            ComboLogin.ItemsSource = AppData.Context.Users.ToList().Select(u =>
+            {
+                return u.LastName + " " + u.MiddleName + " " + u.FirstName;
+            });
         }
 
         /// <summary>
