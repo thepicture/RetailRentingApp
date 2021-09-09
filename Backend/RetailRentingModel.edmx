@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="ChequeId" />
+          </Key>
+          <Property Name="ChequeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayDate" Type="datetime" Nullable="false" />
+          <Property Name="SumOfPaying" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChequeOfCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+            <PropertyRef Name="ChequeId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ChequeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Requisite" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="HeadOfficeAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContactFaceFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactFaceLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactFaceMiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImageOfCustomer" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="PhoneNumberOfCustomer">
+          <Key>
+            <PropertyRef Name="PhoneId" />
+          </Key>
+          <Property Name="PhoneId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Renting">
+          <Key>
+            <PropertyRef Name="RentingId" />
+          </Key>
+          <Property Name="RentingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RentingOfCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+            <PropertyRef Name="RentingId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="RentingId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RentingOfTradingArea">
+          <Key>
+            <PropertyRef Name="RentingId" />
+            <PropertyRef Name="TradingAreaId" />
+          </Key>
+          <Property Name="RentingId" Type="int" Nullable="false" />
+          <Property Name="TradingAreaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TradingArea">
+          <Key>
+            <PropertyRef Name="TradingAreaId" />
+          </Key>
+          <Property Name="TradingAreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Floor" Type="tinyint" Nullable="false" />
+          <Property Name="AreaInSquareMeters" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsAirVenting" Type="bit" Nullable="false" />
+          <Property Name="CostPerDay" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeOfUser">
+          <Key>
+            <PropertyRef Name="TypeOfUserId" />
+          </Key>
+          <Property Name="TypeOfUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TypeOfUserId" Type="int" Nullable="false" />
+          <Property Name="ImageOfUser" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_ChequeOfCustomer_Cheque">
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="1" />
+          <End Role="ChequeOfCustomer" Type="Self.ChequeOfCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cheque">
+              <PropertyRef Name="ChequeId" />
+            </Principal>
+            <Dependent Role="ChequeOfCustomer">
+              <PropertyRef Name="ChequeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChequeOfCustomer_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="ChequeOfCustomer" Type="Self.ChequeOfCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="ChequeOfCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhoneNumberOfCustomer_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="PhoneNumberOfCustomer" Type="Self.PhoneNumberOfCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="PhoneNumberOfCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentingOfCustomer_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="RentingOfCustomer" Type="Self.RentingOfCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="RentingOfCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentingOfCustomer_Renting">
+          <End Role="Renting" Type="Self.Renting" Multiplicity="1" />
+          <End Role="RentingOfCustomer" Type="Self.RentingOfCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Renting">
+              <PropertyRef Name="RentingId" />
+            </Principal>
+            <Dependent Role="RentingOfCustomer">
+              <PropertyRef Name="RentingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentingOfTradingArea_Renting">
+          <End Role="Renting" Type="Self.Renting" Multiplicity="1" />
+          <End Role="RentingOfTradingArea" Type="Self.RentingOfTradingArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Renting">
+              <PropertyRef Name="RentingId" />
+            </Principal>
+            <Dependent Role="RentingOfTradingArea">
+              <PropertyRef Name="RentingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentingOfTradingArea_TradingArea">
+          <End Role="TradingArea" Type="Self.TradingArea" Multiplicity="1" />
+          <End Role="RentingOfTradingArea" Type="Self.RentingOfTradingArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TradingArea">
+              <PropertyRef Name="TradingAreaId" />
+            </Principal>
+            <Dependent Role="RentingOfTradingArea">
+              <PropertyRef Name="TradingAreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_TypeOfUser">
+          <End Role="TypeOfUser" Type="Self.TypeOfUser" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfUser">
+              <PropertyRef Name="TypeOfUserId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="TypeOfUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BaseModelStoreContainer">
+          <EntitySet Name="Cheque" EntityType="Self.Cheque" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChequeOfCustomer" EntityType="Self.ChequeOfCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhoneNumberOfCustomer" EntityType="Self.PhoneNumberOfCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Renting" EntityType="Self.Renting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentingOfCustomer" EntityType="Self.RentingOfCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentingOfTradingArea" EntityType="Self.RentingOfTradingArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TradingArea" EntityType="Self.TradingArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfUser" EntityType="Self.TypeOfUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ChequeOfCustomer_Cheque" Association="Self.FK_ChequeOfCustomer_Cheque">
+            <End Role="Cheque" EntitySet="Cheque" />
+            <End Role="ChequeOfCustomer" EntitySet="ChequeOfCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChequeOfCustomer_Customer" Association="Self.FK_ChequeOfCustomer_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="ChequeOfCustomer" EntitySet="ChequeOfCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhoneNumberOfCustomer_Customer" Association="Self.FK_PhoneNumberOfCustomer_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="PhoneNumberOfCustomer" EntitySet="PhoneNumberOfCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentingOfCustomer_Customer" Association="Self.FK_RentingOfCustomer_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="RentingOfCustomer" EntitySet="RentingOfCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentingOfCustomer_Renting" Association="Self.FK_RentingOfCustomer_Renting">
+            <End Role="Renting" EntitySet="Renting" />
+            <End Role="RentingOfCustomer" EntitySet="RentingOfCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentingOfTradingArea_Renting" Association="Self.FK_RentingOfTradingArea_Renting">
+            <End Role="Renting" EntitySet="Renting" />
+            <End Role="RentingOfTradingArea" EntitySet="RentingOfTradingArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentingOfTradingArea_TradingArea" Association="Self.FK_RentingOfTradingArea_TradingArea">
+            <End Role="TradingArea" EntitySet="TradingArea" />
+            <End Role="RentingOfTradingArea" EntitySet="RentingOfTradingArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_TypeOfUser" Association="Self.FK_User_TypeOfUser">
+            <End Role="TypeOfUser" EntitySet="TypeOfUser" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="ChequeId" />
+          </Key>
+          <Property Name="ChequeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SumOfPaying" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.ChequeOfCustomer" FromRole="Cheque" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Requisite" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HeadOfficeAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactFaceFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactFaceLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactFaceMiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageOfCustomer" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="PhoneNumberOfCustomers" Relationship="Self.FK_PhoneNumberOfCustomer_Customer" FromRole="Customer" ToRole="PhoneNumberOfCustomer" />
+          <NavigationProperty Name="Cheques" Relationship="Self.ChequeOfCustomer" FromRole="Customer" ToRole="Cheque" />
+          <NavigationProperty Name="Rentings" Relationship="Self.RentingOfCustomer" FromRole="Customer" ToRole="Renting" />
+        </EntityType>
+        <EntityType Name="PhoneNumberOfCustomer">
+          <Key>
+            <PropertyRef Name="PhoneId" />
+          </Key>
+          <Property Name="PhoneId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_PhoneNumberOfCustomer_Customer" FromRole="PhoneNumberOfCustomer" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Renting">
+          <Key>
+            <PropertyRef Name="RentingId" />
+          </Key>
+          <Property Name="RentingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customers" Relationship="Self.RentingOfCustomer" FromRole="Renting" ToRole="Customer" />
+          <NavigationProperty Name="TradingAreas" Relationship="Self.RentingOfTradingArea" FromRole="Renting" ToRole="TradingArea" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TradingArea">
+          <Key>
+            <PropertyRef Name="TradingAreaId" />
+          </Key>
+          <Property Name="TradingAreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Floor" Type="Byte" Nullable="false" />
+          <Property Name="AreaInSquareMeters" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsAirVenting" Type="Boolean" Nullable="false" />
+          <Property Name="CostPerDay" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Rentings" Relationship="Self.RentingOfTradingArea" FromRole="TradingArea" ToRole="Renting" />
+        </EntityType>
+        <EntityType Name="TypeOfUser">
+          <Key>
+            <PropertyRef Name="TypeOfUserId" />
+          </Key>
+          <Property Name="TypeOfUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_TypeOfUser" FromRole="TypeOfUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeOfUserId" Type="Int32" Nullable="false" />
+          <Property Name="ImageOfUser" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="TypeOfUser" Relationship="Self.FK_User_TypeOfUser" FromRole="User" ToRole="TypeOfUser" />
+        </EntityType>
+        <Association Name="FK_PhoneNumberOfCustomer_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="PhoneNumberOfCustomer" Type="Self.PhoneNumberOfCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="PhoneNumberOfCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_TypeOfUser">
+          <End Role="TypeOfUser" Type="Self.TypeOfUser" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfUser">
+              <PropertyRef Name="TypeOfUserId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="TypeOfUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ChequeOfCustomer">
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+        </Association>
+        <Association Name="RentingOfCustomer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <End Role="Renting" Type="Self.Renting" Multiplicity="*" />
+        </Association>
+        <Association Name="RentingOfTradingArea">
+          <End Role="Renting" Type="Self.Renting" Multiplicity="*" />
+          <End Role="TradingArea" Type="Self.TradingArea" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="RetailRentingBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cheques" EntityType="Self.Cheque" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="PhoneNumberOfCustomers" EntityType="Self.PhoneNumberOfCustomer" />
+          <EntitySet Name="Rentings" EntityType="Self.Renting" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TradingAreas" EntityType="Self.TradingArea" />
+          <EntitySet Name="TypeOfUsers" EntityType="Self.TypeOfUser" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_PhoneNumberOfCustomer_Customer" Association="Self.FK_PhoneNumberOfCustomer_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="PhoneNumberOfCustomer" EntitySet="PhoneNumberOfCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_TypeOfUser" Association="Self.FK_User_TypeOfUser">
+            <End Role="TypeOfUser" EntitySet="TypeOfUsers" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="ChequeOfCustomer" Association="Self.ChequeOfCustomer">
+            <End Role="Cheque" EntitySet="Cheques" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="RentingOfCustomer" Association="Self.RentingOfCustomer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Renting" EntitySet="Rentings" />
+          </AssociationSet>
+          <AssociationSet Name="RentingOfTradingArea" Association="Self.RentingOfTradingArea">
+            <End Role="Renting" EntitySet="Rentings" />
+            <End Role="TradingArea" EntitySet="TradingAreas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BaseModelStoreContainer" CdmEntityContainer="RetailRentingBaseEntities">
+          <EntitySetMapping Name="Cheques">
+            <EntityTypeMapping TypeName="BaseModel.Cheque">
+              <MappingFragment StoreEntitySet="Cheque">
+                <ScalarProperty Name="ChequeId" ColumnName="ChequeId" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="SumOfPaying" ColumnName="SumOfPaying" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="BaseModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Requisite" ColumnName="Requisite" />
+                <ScalarProperty Name="HeadOfficeAddress" ColumnName="HeadOfficeAddress" />
+                <ScalarProperty Name="ContactFaceFirstName" ColumnName="ContactFaceFirstName" />
+                <ScalarProperty Name="ContactFaceLastName" ColumnName="ContactFaceLastName" />
+                <ScalarProperty Name="ContactFaceMiddleName" ColumnName="ContactFaceMiddleName" />
+                <ScalarProperty Name="ImageOfCustomer" ColumnName="ImageOfCustomer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneNumberOfCustomers">
+            <EntityTypeMapping TypeName="BaseModel.PhoneNumberOfCustomer">
+              <MappingFragment StoreEntitySet="PhoneNumberOfCustomer">
+                <ScalarProperty Name="PhoneId" ColumnName="PhoneId" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rentings">
+            <EntityTypeMapping TypeName="BaseModel.Renting">
+              <MappingFragment StoreEntitySet="Renting">
+                <ScalarProperty Name="RentingId" ColumnName="RentingId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BaseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TradingAreas">
+            <EntityTypeMapping TypeName="BaseModel.TradingArea">
+              <MappingFragment StoreEntitySet="TradingArea">
+                <ScalarProperty Name="TradingAreaId" ColumnName="TradingAreaId" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="AreaInSquareMeters" ColumnName="AreaInSquareMeters" />
+                <ScalarProperty Name="IsAirVenting" ColumnName="IsAirVenting" />
+                <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfUsers">
+            <EntityTypeMapping TypeName="BaseModel.TypeOfUser">
+              <MappingFragment StoreEntitySet="TypeOfUser">
+                <ScalarProperty Name="TypeOfUserId" ColumnName="TypeOfUserId" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BaseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="TypeOfUserId" ColumnName="TypeOfUserId" />
+                <ScalarProperty Name="ImageOfUser" ColumnName="ImageOfUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ChequeOfCustomer" TypeName="BaseModel.ChequeOfCustomer" StoreEntitySet="ChequeOfCustomer">
+            <EndProperty Name="Cheque">
+              <ScalarProperty Name="ChequeId" ColumnName="ChequeId" />
+            </EndProperty>
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RentingOfCustomer" TypeName="BaseModel.RentingOfCustomer" StoreEntitySet="RentingOfCustomer">
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+            </EndProperty>
+            <EndProperty Name="Renting">
+              <ScalarProperty Name="RentingId" ColumnName="RentingId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RentingOfTradingArea" TypeName="BaseModel.RentingOfTradingArea" StoreEntitySet="RentingOfTradingArea">
+            <EndProperty Name="Renting">
+              <ScalarProperty Name="RentingId" ColumnName="RentingId" />
+            </EndProperty>
+            <EndProperty Name="TradingArea">
+              <ScalarProperty Name="TradingAreaId" ColumnName="TradingAreaId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
