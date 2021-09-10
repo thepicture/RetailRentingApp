@@ -14,9 +14,13 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0"
+                      Grid.Column="0">
+                    <Image Source="/Resources/house.png"></Image>
+                </Grid>
                 <Grid Grid.Column="1"
                   Background="LightBlue">
                     <TextBlock Text="Главная кнопочная форма"
@@ -46,9 +50,11 @@
                     </Grid.RowDefinitions>
                     <!--Styles for buttons.-->
                     <Grid Grid.Row="0">
-                        <Button Style="{StaticResource MainUserWindowButton}">Свободные торговые точки</Button>
+                        <Button Style="{StaticResource MainUserWindowButton}"
+                                ContentStringFormat="abc">Свободные торговые точки</Button>
                     </Grid>
-                    <Grid Grid.Row="1" Background="LightGray">
+                    <Grid Grid.Row="1"
+                          Background="LightGray">
                         <Button Style="{StaticResource MainUserWindowButton}">Арендуемые торговые точки</Button>
                     </Grid>
                     <Grid Grid.Row="2">
