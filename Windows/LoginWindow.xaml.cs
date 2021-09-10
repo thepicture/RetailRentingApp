@@ -44,6 +44,7 @@ namespace RetailRentingApp
             {
                 Owner = this,
             };
+            TitleInitalizer.Append(mainUserWindow, currentUser.ToString());
             mainUserWindow.Show();
             AppData.CurrentUser = currentUser;
             Hide();

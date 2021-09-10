@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetailRentingApp.Windows"
         mc:Ignorable="d"
-        Title="MainUserWindow" Height="450" Width="800">
+        Title="Главная кнопочная форма"
+        Height="450"
+        Width="800"
+        MinWidth="700"
+        MinHeight="350"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
