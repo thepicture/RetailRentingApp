@@ -1,5 +1,6 @@
 ﻿using RetailRentingApp.Backend;
 using RetailRentingApp.Classes;
+using RetailRentingApp.Windows;
 using System;
 using System.Linq;
 using System.Windows;
@@ -39,7 +40,13 @@ namespace RetailRentingApp
 
         private void InitializeWindowFor(User currentUser)
         {
-            throw new NotImplementedException();
+            MainUserWindow mainUserWindow = new MainUserWindow
+            {
+                Owner = this,
+            };
+            mainUserWindow.Show();
+            AppData.CurrentUser = currentUser;
+            Hide();
         }
 
         private void ShowSomethingWentWrongMessage()
