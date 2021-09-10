@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:RetailRentingApp"
              StartupUri="Windows/LoginWindow.xaml">
     <Application.Resources>
-        <!--Styles for app.-->
+        <!--Styles for LoginWindow.-->
         <Style TargetType="TextBlock" x:Key="CommonBlock">
             <Setter Property="Margin" Value="5" />
             <Setter Property="TextAlignment" Value="Right" />
@@ -43,6 +43,14 @@
         <Style TargetType="DataGrid">
             <Setter Property="Margin" Value="5" />
             <Setter Property="AutoGenerateColumns" Value="False" />
+        </Style>
+        <!--Styles for MainUserWindow-->
+        <Style TargetType="Button" x:Key="MainUserWindowButton">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
     </Application.Resources>
 </Application>

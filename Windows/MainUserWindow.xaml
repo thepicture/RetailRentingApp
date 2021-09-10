@@ -20,10 +20,11 @@
                 <Grid Grid.Column="1"
                   Background="LightBlue">
                     <TextBlock Text="Главная кнопочная форма"
-                           FontSize="30"
+                           FontSize="25"
                            HorizontalAlignment="Center"
                            Foreground="DarkBlue"
-                           FontWeight="Bold">
+                           FontWeight="Bold"
+                           VerticalAlignment="Center">
                     </TextBlock>
                 </Grid>
             </Grid>
@@ -45,15 +46,26 @@
                     </Grid.RowDefinitions>
                     <!--Styles for buttons.-->
                     <Grid Grid.Row="0">
-                        <Button Style="{x:Null}"
-                                FontWeight="Bold">Свободные торговые точки</Button>
+                        <Button Style="{StaticResource MainUserWindowButton}">Свободные торговые точки</Button>
                     </Grid>
-                    <Grid Grid.Row="1" Background="LightGray"></Grid>
-                    <Grid Grid.Row="2"></Grid>
-                    <Grid Grid.Row="3" Background="LightGray"></Grid>
-                    <Grid Grid.Row="4"></Grid>
-                    <Grid Grid.Row="5" Background="LightGray"></Grid>
-                    <Grid Grid.Row="6"></Grid>
+                    <Grid Grid.Row="1" Background="LightGray">
+                        <Button Style="{StaticResource MainUserWindowButton}">Арендуемые торговые точки</Button>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Button Style="{StaticResource MainUserWindowButton}">Торговые точки</Button>
+                    </Grid>
+                    <Grid Grid.Row="3" Background="LightGray">
+                        <Button Style="{StaticResource MainUserWindowButton}">Аренда</Button>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Button Style="{StaticResource MainUserWindowButton}">Оплата</Button>
+                    </Grid>
+                    <Grid Grid.Row="5" Background="LightGray">
+                        <Button Style="{StaticResource MainUserWindowButton}">Клиенты</Button>
+                    </Grid>
+                    <Grid Grid.Row="6">
+                        <Button Style="{StaticResource MainUserWindowButton}">Отчёт по долгу клиентов</Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
