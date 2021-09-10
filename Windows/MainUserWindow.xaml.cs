@@ -23,5 +23,20 @@ namespace RetailRentingApp.Windows
         {
             InitializeComponent();
         }
+
+        private void BtnFreeRetailLocations_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFreeRetailWindow();
+        }
+
+        private void OpenFreeRetailWindow()
+        {
+            var freeTradingLocationsWindow = new FreeTradingLocationsWindow
+            {
+                Owner = this
+            };
+            freeTradingLocationsWindow.Show();
+            Hide();
+        }
     }
 }

@@ -50,8 +50,9 @@
                     </Grid.RowDefinitions>
                     <!--Styles for buttons.-->
                     <Grid Grid.Row="0">
-                        <Button Style="{StaticResource MainUserWindowButton}"
-                                ContentStringFormat="abc">Свободные торговые точки</Button>
+                        <Button Name="BtnFreeRetailLocations"
+                                Style="{StaticResource MainUserWindowButton}"
+                                Click="BtnFreeRetailLocations_Click">Свободные торговые точки</Button>
                     </Grid>
                     <Grid Grid.Row="1"
                           Background="LightGray">

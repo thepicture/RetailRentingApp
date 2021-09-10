@@ -53,7 +53,7 @@
             <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
         <!--Styles for FreeTradingLocationsWindow.-->
-        <Style TargetType="TextBlock">
+        <Style TargetType="TextBlock" x:Key="HeaderBlock">
             <Setter Property="Foreground" Value="DarkBlue" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />

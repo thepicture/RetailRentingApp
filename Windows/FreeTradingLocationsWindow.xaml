@@ -13,12 +13,13 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"
-                  Height="100"
                   Background="LightBlue">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Свободные в период с"></TextBlock>
+                    <TextBlock Text="Свободные в период с"
+                               Style="{StaticResource HeaderBlock}"></TextBlock>
                     <DatePicker></DatePicker>
-                    <TextBlock Text="по"></TextBlock>
+                    <TextBlock Text="по"
+                               Style="{StaticResource HeaderBlock}"></TextBlock>
                     <DatePicker></DatePicker>
                 </StackPanel>
             </Grid>
