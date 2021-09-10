@@ -14,6 +14,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"
@@ -21,11 +22,55 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Свободные в период с"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
-                    <DatePicker></DatePicker>
+                    <DatePicker Name="FromPicker"
+                                SelectedDateChanged="FromPicker_SelectedDateChanged"></DatePicker>
                     <TextBlock Text="по"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
-                    <DatePicker></DatePicker>
+                    <DatePicker Name="ToPicker"
+                                SelectedDateChanged="ToPicker_SelectedDateChanged"></DatePicker>
                 </StackPanel>
+            </Grid>
+            <!--Grid with main area.-->
+            <Grid Name="UserInputArea"
+                  Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource CommonBlock}"
+                                   Text="Код торговой точки"></TextBlock>
+                        <TextBox Name="TradingAreaCodeBox"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource CommonBlock}"
+                                   Text="Этаж"></TextBlock>
+                        <TextBox Name="FloorBox"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource CommonBlock}"
+                                   Text="Площадь"></TextBlock>
+                        <TextBox Name="AreaBox"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource CommonBlock}"
+                                   Text="Наличие кондиционера"></TextBlock>
+                        <CheckBox Name="isAirVentBox"></CheckBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource CommonBlock}"
+                                   Text="Стоимость в день"></TextBlock>
+                        <TextBox Name="PricePerDayBox"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2">
+                <DataGrid Name="TradingAreasGrid">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Код торговой точки"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Этаж"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Площадь"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Наличие кондиционера"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Стоимость в день"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Grid>
     </Grid>

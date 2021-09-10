@@ -23,5 +23,15 @@ namespace RetailRentingApp.Windows
         {
             InitializeComponent();
         }
+
+        private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ToPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
