@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RetailRentingApp.Backend;
+using RetailRentingApp.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +21,34 @@ namespace RetailRentingApp.Windows
     /// </summary>
     public partial class FreeTradingLocationsWindow : Window
     {
+        private List<TradingArea> currentTradingLocations = new List<TradingArea>();
         public FreeTradingLocationsWindow()
         {
             InitializeComponent();
+
+            UpdateDataGrid();
+        }
+
+        private void UpdateDataGrid()
+        {
+            currentTradingLocations = AppData.Context.TradingArea.ToList();
+
+            if (FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
+                & FromPicker.SelectedDate < ToPicker.SelectedDate)
+            {
+            }
+
+            TradingAreasGrid.ItemsSource = currentTradingLocations;
         }
 
         private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            UpdateDataGrid();
         }
 
         private void ToPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            UpdateDataGrid();
         }
     }
 }

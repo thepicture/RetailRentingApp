@@ -64,11 +64,27 @@
             <Grid Grid.Row="2">
                 <DataGrid Name="TradingAreasGrid">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Код торговой точки"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Этаж"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Площадь"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Наличие кондиционера"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Стоимость в день"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Этаж"
+                                            Binding="{Binding Floor}"
+                                            Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Площадь"
+                                            Binding="{Binding AreaInSquareMeters}"
+                                            Width="*"></DataGridTextColumn>
+                        <DataGridCheckBoxColumn Header="Наличие кондиционера"
+                                            Binding="{Binding IsAirVenting}"
+                                            Width="*"></DataGridCheckBoxColumn>
+                        <DataGridTextColumn Header="Стоимость в день"
+                                            Binding="{Binding CostPerDay}"
+                                            Width="*"></DataGridTextColumn>
+                        <DataGridTemplateColumn Header="Изображение"
+                                                Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Image}">
+                                    </Image>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
