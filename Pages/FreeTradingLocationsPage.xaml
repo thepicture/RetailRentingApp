@@ -12,7 +12,6 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -59,11 +58,19 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <ListView x:Name="LViewTradingAreas">
+            <ListView x:Name="LViewTradingAreas"
+                      Grid.Row="1"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type local:FreeTradingLocationsPage}}}"
-                          Margin="10">
+                              Margin="10">
                             <Grid Background="MediumPurple" Opacity=".2" HorizontalAlignment="Stretch"></Grid>
                             <StackPanel Orientation="Horizontal">
                                 <Image Grid.Column="0"
@@ -72,7 +79,7 @@
                                    Height="200"
                                    Stretch="UniformToFill"
                                    Source="{Binding Image}"
-                                   Margin="5">
+                                   Margin="10">
                                 </Image>
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{Binding Name}"
@@ -104,39 +111,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid Grid.Row="2" Visibility="Collapsed">
-                <DataGrid Name="TradingAreasGrid">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Название"
-                                            Binding="{Binding Name}"
-                                            Width="auto"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Этаж"
-                                            Binding="{Binding Floor}"
-                                            Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Площадь"
-                                            Binding="{Binding AreaInSquareMeters}"
-                                            Width="*"></DataGridTextColumn>
-                        <DataGridCheckBoxColumn Header="Наличие кондиционера"
-                                            Binding="{Binding IsAirVenting}"
-                                            Width="auto"></DataGridCheckBoxColumn>
-                        <DataGridTextColumn Header="Стоимость в день"
-                                            Binding="{Binding CostPerDay}"
-                                            Width="auto"></DataGridTextColumn>
-                        <DataGridTemplateColumn Header="Изображение"
-                                                Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Image}"
-                                           Width="200"
-                                           Height="200"
-                                           Stretch="UniformToFill">
-                                    </Image>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
         </Grid>
     </Grid>
 </Page>
