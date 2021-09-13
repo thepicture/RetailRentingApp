@@ -28,6 +28,9 @@
                                Style="{StaticResource HeaderBlock}"></TextBlock>
                     <DatePicker Name="ToPicker"
                                 SelectedDateChanged="ToPicker_SelectedDateChanged"></DatePicker>
+                    <Button Content="Очистить период дат"
+                            Name="BtnClearDates"
+                            Click="BtnClearDates_Click"></Button>
                 </StackPanel>
             </Grid>
             <!--Grid with main area.-->
