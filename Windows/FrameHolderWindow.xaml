@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetailRentingApp.Windows"
         mc:Ignorable="d"
-        Title="FrameHolderWindow" Height="450" Width="800">
+        Title="FrameHolderWindow"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen">
     <!--The main purpose of this window is to enable frame integration. It does not make sense as a stand-alone object.-->
     <Grid>
         <Grid.RowDefinitions>
