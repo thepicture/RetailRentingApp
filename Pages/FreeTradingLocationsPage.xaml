@@ -70,7 +70,23 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type local:FreeTradingLocationsPage}}}"
-                              Margin="10">
+                              Margin="10" Opacity="0">
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="0"
+                                                             To="1"
+                                                             Duration="0:0:1"
+                                                             Storyboard.TargetProperty="Opacity">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"></CircleEase>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Grid.Triggers>
                             <Grid Background="MediumPurple" Opacity=".2" HorizontalAlignment="Stretch"></Grid>
                             <StackPanel Orientation="Horizontal">
                                 <Image Grid.Column="0"
