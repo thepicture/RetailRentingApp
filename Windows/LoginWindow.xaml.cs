@@ -40,12 +40,12 @@ namespace RetailRentingApp
 
         private void InitializeWindowFor(User currentUser)
         {
-            MainUserWindow mainUserWindow = new MainUserWindow
+            FrameHolderWindow fHolderWindow = new FrameHolderWindow
             {
                 Owner = this,
             };
-            TitleInitalizer.Append(mainUserWindow, currentUser.ToString());
-            mainUserWindow.Show();
+            TitleInitalizer.Append(fHolderWindow, currentUser.ToString());
+            fHolderWindow.Show();
             AppData.CurrentUser = currentUser;
             Hide();
         }

@@ -69,20 +69,24 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\TitleInitalizer.cs" />
+    <Compile Include="Pages\FreeTradingLocationsPage.xaml.cs">
+      <DependentUpon>FreeTradingLocationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainUserPage.xaml.cs">
+      <DependentUpon>MainUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FrameHolderWindow.xaml.cs">
       <DependentUpon>FrameHolderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\FreeTradingLocationsWindow.xaml.cs">
-      <DependentUpon>FreeTradingLocationsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\MainUserWindow.xaml.cs">
-      <DependentUpon>MainUserWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Windows\FrameHolderWindow.xaml">
+    <Page Include="Pages\FreeTradingLocationsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\FreeTradingLocationsWindow.xaml">
+    <Page Include="Pages\MainUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FrameHolderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,10 +143,6 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\MainUserWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

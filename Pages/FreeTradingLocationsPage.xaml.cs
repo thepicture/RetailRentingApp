@@ -12,22 +12,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RetailRentingApp.Windows
+namespace RetailRentingApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для FreeTradingLocationsWindow.xaml
+    /// Interaction logic for FreeTradingLocationsPage.xaml
     /// </summary>
-    public partial class FreeTradingLocationsWindow : Window
+    public partial class FreeTradingLocationsPage : Page
     {
         private List<TradingArea> currentTradingLocations = new List<TradingArea>();
-        public FreeTradingLocationsWindow()
+        public FreeTradingLocationsPage()
         {
             InitializeComponent();
 
             UpdateDataGrid();
-
         }
 
         private void UpdateDataGrid()
@@ -62,6 +62,7 @@ namespace RetailRentingApp.Windows
         private void BtnClearDates_Click(object sender, RoutedEventArgs e)
         {
             ToPicker.SelectedDate = FromPicker.SelectedDate = null;
+            UpdateDataGrid();
         }
     }
 }
