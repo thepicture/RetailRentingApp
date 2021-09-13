@@ -4,20 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="85639ab9e91842e69fd07852e6b9cad4" Name="Diagram1">
-        <EntityTypeShape EntityType="BaseModel.Cheque" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Customer" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.PhoneNumberOfCustomer" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Renting" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.TradingArea" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.TypeOfUser" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.User" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <AssociationConnector Association="BaseModel.FK_PhoneNumberOfCustomer_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="BaseModel.FK_User_TypeOfUser" ManuallyRouted="false" />
-        <AssociationConnector Association="BaseModel.ChequeOfCustomer" ManuallyRouted="false" />
-        <AssociationConnector Association="BaseModel.RentingOfCustomer" ManuallyRouted="false" />
-        <AssociationConnector Association="BaseModel.RentingOfTradingArea" ManuallyRouted="false" />
+      <Diagram DiagramId="e6e9373d44564dcca0e55c79231a3a56" Name="Diagram1">
+        <EntityTypeShape EntityType="RetailRentingBaseModel.Cheque" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailRentingBaseModel.Customer" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailRentingBaseModel.PhoneNumberOfCustomer" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailRentingBaseModel.Renting" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailRentingBaseModel.RentingOfTradingArea" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailRentingBaseModel.sysdiagram" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailRentingBaseModel.TradingArea" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailRentingBaseModel.TypeOfUser" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailRentingBaseModel.User" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="RetailRentingBaseModel.FK_Cheque_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailRentingBaseModel.FK_PhoneNumberOfCustomer_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailRentingBaseModel.FK_Renting_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailRentingBaseModel.FK_RentingOfTradingArea_Renting" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailRentingBaseModel.FK_RentingOfTradingArea_TradingArea" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailRentingBaseModel.FK_User_TypeOfUser" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailRentingBaseModel.ChequeOfCustomer" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailRentingBaseModel.RentingOfCustomer" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

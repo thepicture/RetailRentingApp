@@ -25,13 +25,14 @@ namespace RetailRentingApp.Backend
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cheque> Cheque { get; set; }
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<PhoneNumberOfCustomer> PhoneNumberOfCustomer { get; set; }
-        public virtual DbSet<Renting> Renting { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<TradingArea> TradingArea { get; set; }
-        public virtual DbSet<TypeOfUser> TypeOfUser { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Cheque> Cheques { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<PhoneNumberOfCustomer> PhoneNumberOfCustomers { get; set; }
+        public virtual DbSet<Renting> Rentings { get; set; }
+        public virtual DbSet<RentingOfTradingArea> RentingOfTradingAreas { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<TradingArea> TradingAreas { get; set; }
+        public virtual DbSet<TypeOfUser> TypeOfUsers { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

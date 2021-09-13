@@ -12,12 +12,15 @@ namespace RetailRentingApp.Backend
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class RentingOfTradingArea
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id { get; set; }
+        public int RentingId { get; set; }
+        public int TradingAreaId { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
+    
+        public virtual Renting Renting { get; set; }
+        public virtual TradingArea TradingArea { get; set; }
     }
 }

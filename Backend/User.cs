@@ -14,13 +14,13 @@ namespace RetailRentingApp.Backend
     
     public partial class User
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Password { get; set; }
         public int TypeOfUserId { get; set; }
-        public byte[] ImageOfUser { get; set; }
+        public byte[] Image { get; set; }
     
         public virtual TypeOfUser TypeOfUser { get; set; }
     }

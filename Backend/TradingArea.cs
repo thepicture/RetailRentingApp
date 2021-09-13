@@ -17,10 +17,10 @@ namespace RetailRentingApp.Backend
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TradingArea()
         {
-            this.Renting = new HashSet<Renting>();
+            this.RentingOfTradingAreas = new HashSet<RentingOfTradingArea>();
         }
     
-        public int TradingAreaId { get; set; }
+        public int Id { get; set; }
         public byte Floor { get; set; }
         public decimal AreaInSquareMeters { get; set; }
         public bool IsAirVenting { get; set; }
@@ -28,6 +28,6 @@ namespace RetailRentingApp.Backend
         public byte[] Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Renting> Renting { get; set; }
+        public virtual ICollection<RentingOfTradingArea> RentingOfTradingAreas { get; set; }
     }
 }

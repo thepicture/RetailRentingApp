@@ -14,7 +14,7 @@ namespace RetailRentingApp.Backend
     
     public partial class PhoneNumberOfCustomer
     {
-        public int PhoneId { get; set; }
+        public int Id { get; set; }
         public string PhoneNumber { get; set; }
         public int CustomerId { get; set; }
     

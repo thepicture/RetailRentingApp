@@ -17,17 +17,17 @@ namespace RetailRentingApp.Backend
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Renting()
         {
-            this.Customer = new HashSet<Customer>();
-            this.TradingArea = new HashSet<TradingArea>();
+            this.RentingOfTradingAreas = new HashSet<RentingOfTradingArea>();
+            this.Customers = new HashSet<Customer>();
         }
     
-        public int RentingId { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
+        public int Id { get; set; }
+        public int ClientId { get; set; }
     
+        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customer { get; set; }
+        public virtual ICollection<RentingOfTradingArea> RentingOfTradingAreas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TradingArea> TradingArea { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

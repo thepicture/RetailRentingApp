@@ -17,25 +17,31 @@ namespace RetailRentingApp.Backend
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.PhoneNumberOfCustomer = new HashSet<PhoneNumberOfCustomer>();
-            this.Cheque = new HashSet<Cheque>();
-            this.Renting = new HashSet<Renting>();
+            this.Cheques = new HashSet<Cheque>();
+            this.PhoneNumberOfCustomers = new HashSet<PhoneNumberOfCustomer>();
+            this.Rentings = new HashSet<Renting>();
+            this.Cheques1 = new HashSet<Cheque>();
+            this.Rentings1 = new HashSet<Renting>();
         }
     
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
         public string CompanyName { get; set; }
         public string Requisite { get; set; }
         public string HeadOfficeAddress { get; set; }
         public string ContactFaceFirstName { get; set; }
         public string ContactFaceLastName { get; set; }
         public string ContactFaceMiddleName { get; set; }
-        public byte[] ImageOfCustomer { get; set; }
+        public byte[] Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhoneNumberOfCustomer> PhoneNumberOfCustomer { get; set; }
+        public virtual ICollection<Cheque> Cheques { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cheque> Cheque { get; set; }
+        public virtual ICollection<PhoneNumberOfCustomer> PhoneNumberOfCustomers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Renting> Renting { get; set; }
+        public virtual ICollection<Renting> Rentings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cheque> Cheques1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Renting> Rentings1 { get; set; }
     }
 }
