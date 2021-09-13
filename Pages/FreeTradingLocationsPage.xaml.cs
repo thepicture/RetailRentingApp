@@ -3,18 +3,8 @@ using RetailRentingApp.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace RetailRentingApp.Pages
@@ -35,12 +25,26 @@ namespace RetailRentingApp.Pages
 
         private void UpdateListView()
         {
-            currentTradingLocations = AppData.Context.TradingAreas.ToList();
+            currentTradingLocations = AppData.Context.TradingAreas.Where(t => t.RentingOfTradingAreas.Count() == 0).ToList();
 
             if (FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
                 & FromPicker.SelectedDate < ToPicker.SelectedDate)
             {
-                currentTradingLocations = currentTradingLocations.Where(t => t.RentingOfTradingAreas.Count() == 0).ToList();
+                currentTradingLocations = currentTradingLocations.Where(l =>
+                {
+                    ICollection<RentingOfTradingArea> rentings = l.RentingOfTradingAreas;
+
+                    rentings = rentings.Where(r => r.EndDate <= FromPicker.SelectedDate && r.StartDate >= ToPicker.SelectedDate).ToList();
+
+                    if (rentings.Count > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }).ToList();
             }
 
             OverwhelmListView();
