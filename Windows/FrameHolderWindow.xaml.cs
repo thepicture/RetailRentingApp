@@ -37,5 +37,10 @@ namespace RetailRentingApp.Windows
                 BtnBack.Visibility = Visibility.Hidden;
             }
         }
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

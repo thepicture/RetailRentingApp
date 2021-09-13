@@ -23,6 +23,11 @@
                     Style="{StaticResource CommonButton}"
                     Name="BtnBack"
                     Click="BtnBack_Click"></Button>
+            <Button Content="Выход"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource CommonButton}"
+                    Name="BtnExit"
+                    Click="BtnExit_Click"></Button>
         </Grid>
         <Frame x:Name="MainFrame"
                Grid.Row="1"
