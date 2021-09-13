@@ -62,11 +62,18 @@ namespace RetailRentingApp.Pages
 
         private void TimerForListView(object sender, EventArgs e)
         {
-            if (currentTradingLocations.Count == 0)
+            bool hasAnyMoreAreas = currentTradingLocations.Count != 0;
+
+            if (!hasAnyMoreAreas)
             {
                 ((DispatcherTimer)sender).Stop();
             }
 
+            AddAnotherArea();
+        }
+
+        private void AddAnotherArea()
+        {
             TradingArea tradingLocation = currentTradingLocations[0];
             currentTradingLocations = currentTradingLocations.Skip(1).ToList();
             LViewTradingAreas.Items.Add(tradingLocation);
