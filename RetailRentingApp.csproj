@@ -111,6 +111,7 @@
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\LoginWindowUtils.cs" />
+    <Compile Include="Classes\PartialTradingArea.cs" />
     <Compile Include="Classes\SimpleDbObjectGenerator.cs" />
     <Compile Include="Classes\SimpleMessager.cs" />
     <Compile Include="Classes\TitleInitalizer.cs" />

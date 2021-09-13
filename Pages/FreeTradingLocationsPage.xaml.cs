@@ -27,7 +27,6 @@ namespace RetailRentingApp.Pages
         {
             InitializeComponent();
 
-            UpdateDataGrid();
             UpdateListView();
         }
 
@@ -50,39 +49,20 @@ namespace RetailRentingApp.Pages
             LViewTradingAreas.ItemsSource = currentTradingLocations;
         }
 
-        private void UpdateDataGrid()
-        {
-            currentTradingLocations = AppData.Context.TradingAreas.ToList();
-
-            if (FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
-                & FromPicker.SelectedDate < ToPicker.SelectedDate)
-            {
-                //currentTradingLocations = currentTradingLocations.Where(l =>
-                //{
-                //    var currentRentings = currentTradingLocations.Where(l => l.Renting.Where(e => e.StartDate >= FromPicker.SelectedDate
-                //    && e.EndDate <= ToPicker.SelectedDate);
-
-                //    return currentRentings.Count() > 0;
-                //}));
-            }
-
-            TradingAreasGrid.ItemsSource = currentTradingLocations;
-        }
-
         private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateDataGrid();
+            UpdateListView();
         }
 
         private void ToPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateDataGrid();
+            UpdateListView();
         }
 
         private void BtnClearDates_Click(object sender, RoutedEventArgs e)
         {
             ToPicker.SelectedDate = FromPicker.SelectedDate = null;
-            UpdateDataGrid();
+            UpdateListView();
         }
     }
 }
