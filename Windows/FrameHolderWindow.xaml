@@ -18,6 +18,9 @@
             <Image Source="/Resources/logo.png"
                    Width="400"
                    Stretch="Uniform"></Image>
+            <Button Content="Назад"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource CommonButton}"></Button>
         </Grid>
         <Frame x:Name="MainFrame"
                Grid.Row="1"></Frame>
