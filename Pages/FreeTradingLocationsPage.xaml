@@ -107,7 +107,7 @@
                                            FontSize="15"
                                            Margin="5"
                                            Grid.Row="1"></TextBlock>
-                                    <TextBlock Text="{Binding Floor, StringFormat={}Этаж: {0}}"
+                                    <TextBlock Text="{Binding Floor, StringFormat={}{0} этаж}"
                                            FontSize="15"
                                            Margin="5"
                                            Grid.Row="2"></TextBlock>
