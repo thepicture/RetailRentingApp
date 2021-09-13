@@ -24,7 +24,7 @@ namespace RetailRentingApp.Pages
     /// </summary>
     public partial class FreeTradingLocationsPage : Page
     {
-        private readonly TimeSpan UPDATE_INTERVAL = TimeSpan.FromMilliseconds(200);
+        private readonly TimeSpan UPDATE_INTERVAL = TimeSpan.FromMilliseconds(500);
         private List<TradingArea> currentTradingLocations = new List<TradingArea>();
         public FreeTradingLocationsPage()
         {
@@ -40,14 +40,9 @@ namespace RetailRentingApp.Pages
             if (FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
                 & FromPicker.SelectedDate < ToPicker.SelectedDate)
             {
-                //currentTradingLocations = currentTradingLocations.Where(l =>
-                //{
-                //    var currentRentings = currentTradingLocations.Where(l => l.Renting.Where(e => e.StartDate >= FromPicker.SelectedDate
-                //    && e.EndDate <= ToPicker.SelectedDate);
-
-                //    return currentRentings.Count() > 0;
-                //}));
+                currentTradingLocations = currentTradingLocations.Where(t => t.RentingOfTradingAreas.Count() == 0).ToList();
             }
+
             OverwhelmListView();
         }
 
