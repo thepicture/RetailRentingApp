@@ -24,7 +24,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Row="0"
                       Grid.Column="0">
-                    <Image Source="/Resources/house.png"></Image>
+                    <Image Source="/RetailRentingApp;component/Resources/commonHouseImage.jpg"></Image>
                 </Grid>
                 <Grid Grid.Column="1"
                   Background="LightBlue">

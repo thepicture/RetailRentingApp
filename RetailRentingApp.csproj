@@ -154,6 +154,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EntityDeploy Include="Backend\BaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -186,7 +187,6 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resources\house.png" />
     <Resource Include="Resources\commonHouseImage.jpg" />
     <Resource Include="mainIcon.ico" />
   </ItemGroup>
