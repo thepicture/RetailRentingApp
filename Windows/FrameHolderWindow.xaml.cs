@@ -17,5 +17,25 @@ namespace RetailRentingApp.Windows
 
             MainFrame.Navigate(new MainUserPage());
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (AppData.MainFrame.CanGoBack)
+            {
+                AppData.MainFrame.GoBack();
+            }
+        }
+
+        private void MainFrame_ContentRendered(object sender, System.EventArgs e)
+        {
+            if (AppData.MainFrame.CanGoBack)
+            {
+                BtnBack.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BtnBack.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }

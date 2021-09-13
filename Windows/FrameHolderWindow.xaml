@@ -20,10 +20,14 @@
                    Stretch="Uniform"></Image>
             <Button Content="Назад"
                     HorizontalAlignment="Right"
-                    Style="{StaticResource CommonButton}"></Button>
+                    Style="{StaticResource CommonButton}"
+                    Name="BtnBack"
+                    Click="BtnBack_Click"></Button>
         </Grid>
         <Frame x:Name="MainFrame"
-               Grid.Row="1"></Frame>
+               Grid.Row="1"
+               ContentRendered="MainFrame_ContentRendered"
+               NavigationUIVisibility="Hidden"></Frame>
         <Grid Grid.Row="2"
               Background="MediumPurple">
         </Grid>
