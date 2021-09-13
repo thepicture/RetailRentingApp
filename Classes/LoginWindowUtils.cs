@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RetailRentingApp.Classes
+﻿namespace RetailRentingApp.Classes
 {
     /// <summary>
     /// The class, in which the only purpose is to clear context of LoginWindow.

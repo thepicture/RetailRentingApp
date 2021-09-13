@@ -43,6 +43,7 @@ namespace RetailRentingApp.Windows
             if (SimpleMessager.ShowQuestion("Точно завершить сессию и вернуться в окно авторизации?"))
             {
                 Close();
+                LoginWindowUtils.ClearContext();
                 AppData.LoginWindow.Show();
             }
         }
