@@ -11,7 +11,38 @@
         WindowStartupLocation="CenterScreen"  
         MinWidth="500"
         MinHeight="250">
-    <Grid>
+    <Grid x:Name="MainGrid"
+          RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <ScaleTransform x:Name="MainGridScale">
+            </ScaleTransform>
+        </Grid.RenderTransform>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard x:Name="InitAnimation">
+                        <DoubleAnimation AutoReverse="False"
+                                         From="0"
+                                         To="1"
+                                         Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                         Duration="0:0:2">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut"></CircleEase>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation AutoReverse="False"
+                                         From="0"
+                                         To="1"
+                                         Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                         Duration="0:0:2">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut"></CircleEase>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">

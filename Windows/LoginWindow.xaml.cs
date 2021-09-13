@@ -17,6 +17,8 @@ namespace RetailRentingApp
             InitializeComponent();
 
             ComboLogin.ItemsSource = AppData.Context.User.ToList();
+
+            PBoxPasswordSecure.Focus();
         }
 
         /// <summary>
@@ -109,6 +111,7 @@ namespace RetailRentingApp
             TBoxPasswordInsecure.Text = PBoxPasswordSecure.Password;
             PBoxPasswordSecure.Visibility = Visibility.Collapsed;
             TBoxPasswordInsecure.Visibility = Visibility.Visible;
+            TBoxPasswordInsecure.Focus();
         }
 
         private void RevealPassword()
@@ -116,6 +119,7 @@ namespace RetailRentingApp
             PBoxPasswordSecure.Password = TBoxPasswordInsecure.Text;
             TBoxPasswordInsecure.Visibility = Visibility.Collapsed;
             PBoxPasswordSecure.Visibility = Visibility.Visible;
+            PBoxPasswordSecure.Focus();
         }
     }
 }
