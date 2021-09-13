@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="FrameHolderWindow"
         Height="550"
-        Width="800"
+        Width="900"
         WindowStartupLocation="CenterScreen">
     <!--The main purpose of this window is to enable frame integration. It does not make sense as a stand-alone object.-->
     <Grid>
