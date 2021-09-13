@@ -40,7 +40,10 @@ namespace RetailRentingApp.Windows
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (SimpleMessager.ShowQuestion("Точно завершить сессию?"))
+            {
+                Close();
+            }
         }
     }
 }
