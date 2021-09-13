@@ -32,6 +32,7 @@ namespace RetailRentingApp
                 {
                     ShowAllIsOkMessageFor(currentUser);
                     InitializeWindowFor(currentUser);
+                    AppData.LoginWindow = this;
                 }
                 else
                 {

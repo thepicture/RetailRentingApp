@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\LoginWindowUtils.cs" />
     <Compile Include="Classes\SimpleMessager.cs" />
     <Compile Include="Classes\TitleInitalizer.cs" />
     <Compile Include="Pages\FreeTradingLocationsPage.xaml.cs">

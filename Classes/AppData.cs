@@ -11,5 +11,6 @@ namespace RetailRentingApp.Classes
         public static RetailRentingBaseEntities Context = new RetailRentingBaseEntities();
         public static User CurrentUser = new User();
         public static Frame MainFrame { get; set; }
+        public static LoginWindow LoginWindow { get; set; }
     }
 }

@@ -40,9 +40,10 @@ namespace RetailRentingApp.Windows
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            if (SimpleMessager.ShowQuestion("Точно завершить сессию?"))
+            if (SimpleMessager.ShowQuestion("Точно завершить сессию и вернуться в окно авторизации?"))
             {
                 Close();
+                AppData.LoginWindow.Show();
             }
         }
     }
