@@ -88,6 +88,7 @@
           <Property Name="IsAirVenting" Type="bit" Nullable="false" />
           <Property Name="CostPerDay" Type="decimal" Precision="20" Scale="2" Nullable="false" />
           <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeOfUser">
           <Key>
@@ -366,6 +367,7 @@
           <Property Name="IsAirVenting" Type="Boolean" Nullable="false" />
           <Property Name="CostPerDay" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="RentingOfTradingAreas" Relationship="Self.FK_RentingOfTradingArea_TradingArea" FromRole="TradingArea" ToRole="RentingOfTradingArea" />
         </EntityType>
         <EntityType Name="TypeOfUser">
@@ -590,6 +592,7 @@
                 <ScalarProperty Name="IsAirVenting" ColumnName="IsAirVenting" />
                 <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -111,8 +111,11 @@
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\LoginWindowUtils.cs" />
+    <Compile Include="Classes\SimpleDbObjectGenerator.cs" />
     <Compile Include="Classes\SimpleMessager.cs" />
     <Compile Include="Classes\TitleInitalizer.cs" />
+    <Compile Include="Classes\TradingAreaDescriptiveGenerator.cs" />
+    <Compile Include="Interfaces\IDescriptiveGenerator.cs" />
     <Compile Include="Pages\FreeTradingLocationsPage.xaml.cs">
       <DependentUpon>FreeTradingLocationsPage.xaml</DependentUpon>
     </Compile>
@@ -185,6 +188,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logo.png" />
+    <Resource Include="Resources\commonHouseImage.jpg" />
+    <Resource Include="mainIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Backend\BaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BaseModel.edmx</DependentUpon>
@@ -195,14 +206,6 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\logo.png" />
-    <Resource Include="Resources\commonHouseImage.jpg" />
-    <Resource Include="mainIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

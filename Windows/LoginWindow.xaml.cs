@@ -16,6 +16,8 @@ namespace RetailRentingApp
         {
             InitializeComponent();
 
+            SimpleDbObjectGenerator.Generate(new TradingAreaDescriptiveGenerator(), 50, AppData.Context);
+
             ComboLogin.ItemsSource = AppData.Context.Users.ToList();
 
             PBoxPasswordSecure.Focus();

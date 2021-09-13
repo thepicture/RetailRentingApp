@@ -26,6 +26,7 @@ namespace RetailRentingApp.Backend
         public bool IsAirVenting { get; set; }
         public decimal CostPerDay { get; set; }
         public byte[] Image { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RentingOfTradingArea> RentingOfTradingAreas { get; set; }
