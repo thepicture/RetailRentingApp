@@ -39,6 +39,7 @@
             <Setter Property="Margin" Value="5" />
             <Setter Property="Width" Value="200" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="25" />
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="Margin" Value="5" />
@@ -54,7 +55,7 @@
         </Style>
         <!--Styles for FreeTradingLocationsPage.-->
         <Style TargetType="TextBlock" x:Key="HeaderBlock">
-            <Setter Property="Foreground" Value="DarkBlue" />
+            <Setter Property="Foreground" Value="Black" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Margin" Value="5" />

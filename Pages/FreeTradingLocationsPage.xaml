@@ -15,8 +15,7 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0"
-                  Background="LightBlue">
+            <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Свободные в период с"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
@@ -27,6 +26,8 @@
                     <DatePicker Name="ToPicker"
                                 SelectedDateChanged="ToPicker_SelectedDateChanged"></DatePicker>
                     <Button Content="Очистить период дат"
+                            Style="{StaticResource CommonButton}"
+                            Width="auto"
                             Name="BtnClearDates"
                             Click="BtnClearDates_Click"></Button>
                 </StackPanel>
@@ -35,11 +36,6 @@
             <Grid Name="UserInputArea"
                   Grid.Row="1">
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource CommonBlock}"
-                                   Text="Код торговой точки"></TextBlock>
-                        <TextBox Name="TradingAreaCodeBox"></TextBox>
-                    </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource CommonBlock}"
                                    Text="Этаж"></TextBlock>
