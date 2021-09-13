@@ -1,0 +1,28 @@
+﻿<Window x:Class="RetailRentingApp.Windows.FrameHolderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RetailRentingApp.Windows"
+        mc:Ignorable="d"
+        Title="FrameHolderWindow" Height="450" Width="800">
+    <!--The main purpose of this window is to enable frame integration. It does not make sense as a stand-alone object.-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+              Background="#50468C">
+            <Image Source="/Resources/logo.png"
+                   Width="400"
+                   Stretch="Uniform"></Image>
+        </Grid>
+        <Frame x:Name="MainFrame"
+               Grid.Row="1"></Frame>
+        <Grid Grid.Row="2"
+              Background="MediumPurple">
+        </Grid>
+    </Grid>
+</Window>

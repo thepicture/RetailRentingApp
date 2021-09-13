@@ -69,12 +69,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\TitleInitalizer.cs" />
+    <Compile Include="Windows\FrameHolderWindow.xaml.cs">
+      <DependentUpon>FrameHolderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FreeTradingLocationsWindow.xaml.cs">
       <DependentUpon>FreeTradingLocationsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainUserWindow.xaml.cs">
       <DependentUpon>MainUserWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\FrameHolderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\FreeTradingLocationsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -187,6 +194,7 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\logo.png" />
     <Resource Include="Resources\commonHouseImage.jpg" />
     <Resource Include="mainIcon.ico" />
   </ItemGroup>
