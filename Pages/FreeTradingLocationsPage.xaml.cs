@@ -28,6 +28,26 @@ namespace RetailRentingApp.Pages
             InitializeComponent();
 
             UpdateDataGrid();
+            UpdateListView();
+        }
+
+        private void UpdateListView()
+        {
+            currentTradingLocations = AppData.Context.TradingAreas.ToList();
+
+            if (FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
+                & FromPicker.SelectedDate < ToPicker.SelectedDate)
+            {
+                //currentTradingLocations = currentTradingLocations.Where(l =>
+                //{
+                //    var currentRentings = currentTradingLocations.Where(l => l.Renting.Where(e => e.StartDate >= FromPicker.SelectedDate
+                //    && e.EndDate <= ToPicker.SelectedDate);
+
+                //    return currentRentings.Count() > 0;
+                //}));
+            }
+
+            LViewTradingAreas.ItemsSource = currentTradingLocations;
         }
 
         private void UpdateDataGrid()
