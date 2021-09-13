@@ -24,11 +24,11 @@
                     <Image Source="/RetailRentingApp;component/Resources/commonHouseImage.jpg"></Image>
                 </Grid>
                 <Grid Grid.Column="1"
-                  Background="LightBlue">
+                  Background="MediumPurple">
                     <TextBlock Text="Главная кнопочная форма"
                            FontSize="25"
                            HorizontalAlignment="Center"
-                           Foreground="DarkBlue"
+                           Foreground="White"
                            FontWeight="Bold"
                            VerticalAlignment="Center">
                     </TextBlock>
@@ -39,7 +39,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Background="DarkBlue"></Grid>
+                <Grid Background="Purple"></Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
