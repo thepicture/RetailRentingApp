@@ -32,7 +32,7 @@ namespace RetailRentingApp.Pages
 
         private void UpdateDataGrid()
         {
-            currentTradingLocations = AppData.Context.TradingArea.ToList();
+            currentTradingLocations = AppData.Context.TradingAreas.ToList();
 
             if (FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
                 & FromPicker.SelectedDate < ToPicker.SelectedDate)

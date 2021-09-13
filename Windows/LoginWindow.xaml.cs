@@ -16,7 +16,7 @@ namespace RetailRentingApp
         {
             InitializeComponent();
 
-            ComboLogin.ItemsSource = AppData.Context.User.ToList();
+            ComboLogin.ItemsSource = AppData.Context.Users.ToList();
 
             PBoxPasswordSecure.Focus();
         }
