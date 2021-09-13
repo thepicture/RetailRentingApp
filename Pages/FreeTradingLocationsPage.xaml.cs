@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace RetailRentingApp.Pages
 {
@@ -22,6 +24,7 @@ namespace RetailRentingApp.Pages
     /// </summary>
     public partial class FreeTradingLocationsPage : Page
     {
+        private readonly TimeSpan UPDATE_INTERVAL = TimeSpan.FromMilliseconds(200);
         private List<TradingArea> currentTradingLocations = new List<TradingArea>();
         public FreeTradingLocationsPage()
         {
@@ -45,19 +48,38 @@ namespace RetailRentingApp.Pages
                 //    return currentRentings.Count() > 0;
                 //}));
             }
-
-            LViewTradingAreas.ItemsSource = currentTradingLocations;
+            OverwhelmListView();
         }
 
-        private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// Non-blocking method for ListView filling with the items.
+        /// </summary>
+        private void OverwhelmListView()
         {
-            UpdateListView();
+            DispatcherTimer timer = new DispatcherTimer
+            {
+                Interval = UPDATE_INTERVAL
+            };
+
+            timer.Start();
+            timer.Tick += TimerForListView;
         }
 
-        private void ToPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void TimerForListView(object sender, EventArgs e)
         {
-            UpdateListView();
+            if (currentTradingLocations.Count == 0)
+            {
+                ((DispatcherTimer)sender).Stop();
+            }
+
+            TradingArea tradingLocation = currentTradingLocations[0];
+            currentTradingLocations = currentTradingLocations.Skip(1).ToList();
+            LViewTradingAreas.Items.Add(tradingLocation);
         }
+
+        private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) => UpdateListView();
+
+        private void ToPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) => UpdateListView();
 
         private void BtnClearDates_Click(object sender, RoutedEventArgs e)
         {

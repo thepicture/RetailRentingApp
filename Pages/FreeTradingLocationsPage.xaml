@@ -31,7 +31,7 @@
                             Click="BtnClearDates_Click"></Button>
                 </StackPanel>
             </Grid>
-            <!--Grid with main area.-->
+            <!--Grid with the main area.-->
             <Grid Name="UserInputArea"
                   Grid.Row="1">
                 <StackPanel Orientation="Vertical">
