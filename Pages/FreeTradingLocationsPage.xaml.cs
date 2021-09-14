@@ -25,6 +25,7 @@ namespace RetailRentingApp.Pages
 
         private void UpdateListView()
         {
+            LViewTradingAreas.Items.Clear();
             currentTradingLocations = AppData.Context.TradingAreas.Where(t => t.RentingOfTradingAreas.Count() == 0).ToList();
 
             if (FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
@@ -71,6 +72,8 @@ namespace RetailRentingApp.Pages
             if (!hasAnyMoreAreas)
             {
                 ((DispatcherTimer)sender).Stop();
+
+                return;
             }
 
             AddAnotherArea();
