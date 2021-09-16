@@ -24,6 +24,8 @@ namespace RetailRentingApp.Windows
         public RegistrationWindow()
         {
             InitializeComponent();
+
+            ComboWorkerType.ItemsSource = AppData.Context.TypeOfUsers.ToList();
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -41,19 +43,9 @@ namespace RetailRentingApp.Windows
         {
             StringBuilder errorsBuilder = new StringBuilder();
 
-            if (string.IsNullOrWhiteSpace(TBoxLogin.Text))
-            {
-                errorsBuilder.AppendLine("Логин не может быть пустым");
-            }
-
             if (string.IsNullOrWhiteSpace(TBoxFullName.Text))
             {
                 errorsBuilder.AppendLine("ФИО не может быть пустым");
-            }
-
-            if (string.IsNullOrWhiteSpace(TBoxLogin.Text))
-            {
-                errorsBuilder.AppendLine("Логин не может быть пустым");
             }
 
             bool isHasAnyErrors = errorsBuilder.Length > 0;
@@ -70,6 +62,7 @@ namespace RetailRentingApp.Windows
                 LastName = credentials[0],
                 MiddleName = credentials[1],
                 FirstName = credentials[2],
+                TypeOfUser = ComboWorkerType.SelectedItem as TypeOfUser
             };
 
             AppData.Context.Users.Add(user);

@@ -11,9 +11,10 @@
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Логин"
+                <TextBlock Text="Должность"
                            Style="{StaticResource CommonBlock}"></TextBlock>
-                <TextBox Name="TBoxLogin"></TextBox>
+                <ComboBox Name="ComboWorkerType"
+                          DisplayMemberPath="TypeName"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="ФИО"
