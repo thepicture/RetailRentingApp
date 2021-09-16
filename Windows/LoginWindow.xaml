@@ -70,6 +70,10 @@
                         Name="BtnExit"
                         Click="BtnExit_Click"></Button>
             </StackPanel>
+            <Button Content="Открыть окно регистрации"
+                        Name="BtnRegister"
+                        Click="BtnRegister_Click"
+                        Width="410"></Button>
         </StackPanel>
     </Grid>
 </Window>

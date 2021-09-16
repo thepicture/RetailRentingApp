@@ -124,5 +124,15 @@ namespace RetailRentingApp
             PBoxPasswordSecure.Visibility = Visibility.Visible;
             PBoxPasswordSecure.Focus();
         }
+
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationWindow regWindow = new RegistrationWindow();
+
+            regWindow.Owner = this;
+            regWindow.ShowDialog();
+
+            Hide();
+        }
     }
 }
