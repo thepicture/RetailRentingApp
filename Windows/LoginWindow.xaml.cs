@@ -63,12 +63,13 @@ namespace RetailRentingApp
                      MessageBoxImage.Warning);
         }
 
+        /// <summary>
+        /// Shows the message for user that all is ok.
+        /// </summary>
+        /// <param name="currentUser"></param>
         private void ShowAllIsOkMessageFor(User currentUser)
         {
-            MessageBox.Show("Добро пожаловать, " + currentUser.ToString() + "!",
-                        "Авторизация успешна!",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
+            SimpleMessager.ShowInfo("Добро пожаловать, " + currentUser.ToString() + "!");
         }
 
         /// <summary>
@@ -140,6 +141,9 @@ namespace RetailRentingApp
             UpdateLoginBox();
         }
 
+        /// <summary>
+        /// Updates the ComboLogin with new data if it exists.
+        /// </summary>
         private void UpdateLoginBox()
         {
             ComboLogin.ItemsSource = AppData.Context.Users.ToList();
