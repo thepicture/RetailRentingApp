@@ -32,5 +32,17 @@ namespace RetailRentingApp.Classes
 
             return result == MessageBoxResult.Yes;
         }
+
+        /// <summary>
+        /// Shows an message information to the user.
+        /// </summary>
+        /// <param name="message">An information message for user.</param>
+        internal static void ShowInfo(string message)
+        {
+            MessageBox.Show(message,
+                "Информация",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
     }
 }

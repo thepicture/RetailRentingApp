@@ -1,18 +1,13 @@
-﻿using RetailRentingApp.Backend;
+﻿using Microsoft.Win32;
+using RetailRentingApp.Backend;
 using RetailRentingApp.Classes;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RetailRentingApp.Windows
 {
@@ -21,6 +16,7 @@ namespace RetailRentingApp.Windows
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+        private byte[] currentImage = null;
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -28,24 +24,44 @@ namespace RetailRentingApp.Windows
             ComboWorkerType.ItemsSource = AppData.Context.TypeOfUsers.ToList();
         }
 
+        /// <summary>
+        /// Button to go back to the login window.
+        /// </summary>
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             bool wantsToGoBack = SimpleMessager.ShowQuestion("Точно вернуться на окно авторизации?");
 
             if (wantsToGoBack)
             {
-                Close();
-                AppData.LoginWindow.Show();
+                AbstractClose();
             }
         }
 
+        private void AbstractClose()
+        {
+            Close();
+            AppData.LoginWindow.Show();
+        }
+
+        /// <summary>
+        /// Register the new user
+        /// or messages the user that input data is incorrect.
+        /// </summary>
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errorsBuilder = new StringBuilder();
 
-            if (string.IsNullOrWhiteSpace(TBoxFullName.Text))
+            if (string.IsNullOrEmpty(TBoxFullName.Text))
             {
                 errorsBuilder.AppendLine("ФИО не может быть пустым");
+            }
+
+            if (string.IsNullOrEmpty(PBoxFirstPassword.Password)
+                || string.IsNullOrEmpty(PBoxPasswordSecond.Password)
+                || PBoxFirstPassword.Password != PBoxPasswordSecond.Password)
+            {
+                errorsBuilder.AppendLine("Первый пароль должен совпадать со вторым,\n" +
+                    "пустые пароли не допускаются");
             }
 
             bool isHasAnyErrors = errorsBuilder.Length > 0;
@@ -53,6 +69,7 @@ namespace RetailRentingApp.Windows
             if (isHasAnyErrors)
             {
                 SimpleMessager.ShowError(errorsBuilder.ToString());
+                return;
             }
 
             string[] credentials = TBoxFullName.Text.Split(' ');
@@ -62,7 +79,9 @@ namespace RetailRentingApp.Windows
                 LastName = credentials[0],
                 MiddleName = credentials[1],
                 FirstName = credentials[2],
-                TypeOfUser = ComboWorkerType.SelectedItem as TypeOfUser
+                Password = PBoxFirstPassword.Password,
+                TypeOfUser = ComboWorkerType.SelectedItem as TypeOfUser,
+                Image = currentImage
             };
 
             AppData.Context.Users.Add(user);
@@ -71,10 +90,28 @@ namespace RetailRentingApp.Windows
             {
                 AppData.Context.SaveChanges();
                 MessageBox.Show("Данные успешно сохранены!");
+                AbstractClose();
             }
             catch (Exception ex)
             {
                 SimpleMessager.ShowError(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Appends a new photo to the new user.
+        /// </summary>
+        private void BtnSelectPhoto_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            if ((bool)fileDialog.ShowDialog() == true)
+            {
+                string path = fileDialog.FileName;
+                ImageSource photo = new BitmapImage(new Uri(path));
+                currentImage = File.ReadAllBytes(path);
+                UserImage.Source = photo;
+                SimpleMessager.ShowInfo("Фото успешно прикреплено!");
             }
         }
     }

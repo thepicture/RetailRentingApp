@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetailRentingApp.Windows"
         mc:Ignorable="d"
-        Title="Регистрация нового пользователя" Height="450" Width="800"
-        MinHeight="450" MinWidth="800">
+        Title="Регистрация нового пользователя" Height="450" Width="600"
+        MinHeight="450" MinWidth="600"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
@@ -14,7 +16,8 @@
                 <TextBlock Text="Должность"
                            Style="{StaticResource CommonBlock}"></TextBlock>
                 <ComboBox Name="ComboWorkerType"
-                          DisplayMemberPath="TypeName"></ComboBox>
+                          DisplayMemberPath="TypeName"
+                          SelectedIndex="0"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="ФИО"
@@ -30,6 +33,14 @@
                 <TextBlock Text="Повтор пароля"
                            Style="{StaticResource CommonBlock}"></TextBlock>
                 <PasswordBox Name="PBoxPasswordSecond"></PasswordBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Фотография"
+                       Style="{StaticResource CommonBlock}"></TextBlock>
+                <StackPanel>
+                    <Image x:Name="UserImage" Width="150" Height="150" Stretch="UniformToFill"></Image>
+                    <Button Name="BtnSelectPhoto" Content="Выбрать..." Click="BtnSelectPhoto_Click"></Button>
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button Name="BtnRegister" Content="Зарегистрироваться" Click="BtnRegister_Click"></Button>

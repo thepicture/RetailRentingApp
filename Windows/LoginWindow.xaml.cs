@@ -125,14 +125,24 @@ namespace RetailRentingApp
             PBoxPasswordSecure.Focus();
         }
 
+        /// <summary>
+        /// Goes to the register window.
+        /// </summary>
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegistrationWindow regWindow = new RegistrationWindow();
+            Hide();
 
-            regWindow.Owner = this;
+            RegistrationWindow regWindow = new RegistrationWindow();
+            AppData.LoginWindow = this;
+
             regWindow.ShowDialog();
 
-            Hide();
+            UpdateLoginBox();
+        }
+
+        private void UpdateLoginBox()
+        {
+            ComboLogin.ItemsSource = AppData.Context.Users.ToList();
         }
     }
 }
