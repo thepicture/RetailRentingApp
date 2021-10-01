@@ -8,7 +8,19 @@ namespace RetailRentingApp.Classes
     /// </summary>
     public class AppData
     {
-        public static RetailRentingBaseEntities Context = new RetailRentingBaseEntities();
+        private static RetailRentingBaseEntities _context;
+        public static RetailRentingBaseEntities Context
+        {
+            get
+            {
+                if (_context == null)
+                {
+                    _context = new RetailRentingBaseEntities();
+                }
+
+                return _context;
+            }
+        }
         public static User CurrentUser = new User();
         public static Frame MainFrame { get; set; }
         public static LoginWindow LoginWindow { get; set; }
