@@ -28,7 +28,10 @@ namespace RetailRentingApp.Classes
         /// <returns>The bool result of user's choice.</returns>
         public static bool ShowQuestion(string message)
         {
-            MessageBoxResult result = MessageBox.Show(message, "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show(message, 
+                "Внимание",
+                MessageBoxButton.YesNo, 
+                MessageBoxImage.Question);
 
             return result == MessageBoxResult.Yes;
         }

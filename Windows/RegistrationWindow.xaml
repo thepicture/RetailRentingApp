@@ -38,13 +38,19 @@
                 <TextBlock Text="Фотография"
                        Style="{StaticResource CommonBlock}"></TextBlock>
                 <StackPanel>
-                    <Image x:Name="UserImage" Width="150" Height="150" Stretch="UniformToFill"></Image>
-                    <Button Name="BtnSelectPhoto" Content="Выбрать..." Click="BtnSelectPhoto_Click"></Button>
+                    <Image x:Name="UserImage"
+                           Width="150" Height="150" Stretch="UniformToFill"></Image>
+                    <Button Name="BtnSelectPhoto"
+                            Content="Выбрать..."
+                            Click="BtnSelectPhoto_Click"></Button>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Name="BtnRegister" Content="Зарегистрироваться" Click="BtnRegister_Click"></Button>
-                <Button Name="BtnClose" Content="Отмена" Click="BtnClose_Click"></Button>
+                <Button Name="BtnRegister" Content="Зарегистрироваться"
+                        Click="BtnRegister_Click"></Button>
+                <Button Name="BtnClose"
+                        Content="Отмена"
+                        Click="BtnClose_Click"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

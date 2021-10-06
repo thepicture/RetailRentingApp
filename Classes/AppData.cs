@@ -9,6 +9,7 @@ namespace RetailRentingApp.Classes
     public class AppData
     {
         private static RetailRentingBaseEntities _context;
+
         public static RetailRentingBaseEntities Context
         {
             get

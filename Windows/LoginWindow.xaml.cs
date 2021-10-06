@@ -18,7 +18,7 @@ namespace RetailRentingApp
 
             // SimpleDbObjectGenerator.Generate(new TradingAreaDescriptiveGenerator(), 50, AppData.Context);
 
-            ComboLogin.ItemsSource = AppData.Context.Users.ToList();
+            DataContext = AppData.Context.Users.ToList();
 
             PBoxPasswordSecure.Focus();
         }
@@ -28,9 +28,12 @@ namespace RetailRentingApp
         /// </summary>
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (ComboLogin.SelectedItem is User currentUser)
+            User currentUser = ComboLogin.SelectedItem as User;
+            bool userIsSelectedInComboBox = null != currentUser;
+
+            if (userIsSelectedInComboBox)
             {
-                if (PBoxPasswordSecure.Password == currentUser.Password)
+                if (PasswordIsCorrectFor(currentUser))
                 {
                     ShowAllIsOkMessageFor(currentUser);
                     InitializeWindowFor(currentUser);
@@ -41,6 +44,11 @@ namespace RetailRentingApp
                     ShowSomethingWentWrongMessage();
                 }
             }
+        }
+
+        private bool PasswordIsCorrectFor(User currentUser)
+        {
+            return PBoxPasswordSecure.Password == currentUser.Password;
         }
 
         private void InitializeWindowFor(User currentUser)
@@ -77,10 +85,15 @@ namespace RetailRentingApp
         /// </summary>
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Точно покинуть приложение?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (UserWantsToExitApp())
             {
                 App.Current.Shutdown();
             }
+        }
+
+        private static bool UserWantsToExitApp()
+        {
+            return SimpleMessager.ShowQuestion("Точно покинуть приложение?");
         }
 
         /// <summary>
@@ -88,7 +101,7 @@ namespace RetailRentingApp
         /// </summary>
         private void CheckPasswordBox_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckPasswordBox.IsChecked == true)
+            if (UserWantsToShowPassword())
             {
                 HidePassword();
                 DisableLoginButton();
@@ -98,6 +111,11 @@ namespace RetailRentingApp
                 RevealPassword();
                 EnableLoginButton();
             }
+        }
+
+        private bool UserWantsToShowPassword()
+        {
+            return CheckPasswordBox.IsChecked == true;
         }
 
         private void EnableLoginButton()
@@ -131,14 +149,19 @@ namespace RetailRentingApp
         /// </summary>
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-
-            RegistrationWindow regWindow = new RegistrationWindow();
-            AppData.LoginWindow = this;
+            RegistrationWindow regWindow = GetRegistrationWindow();
 
             regWindow.ShowDialog();
-
             UpdateLoginBox();
+
+            Hide();
+        }
+
+        private RegistrationWindow GetRegistrationWindow()
+        {
+            RegistrationWindow regWindow = new RegistrationWindow();
+            AppData.LoginWindow = this;
+            return regWindow;
         }
 
         /// <summary>

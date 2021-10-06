@@ -49,20 +49,7 @@ namespace RetailRentingApp.Windows
         /// </summary>
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder errorsBuilder = new StringBuilder();
-
-            if (string.IsNullOrEmpty(TBoxFullName.Text))
-            {
-                errorsBuilder.AppendLine("ФИО не может быть пустым");
-            }
-
-            if (string.IsNullOrEmpty(PBoxFirstPassword.Password)
-                || string.IsNullOrEmpty(PBoxPasswordSecond.Password)
-                || PBoxFirstPassword.Password != PBoxPasswordSecond.Password)
-            {
-                errorsBuilder.AppendLine("Первый пароль должен совпадать со вторым,\n" +
-                    "пустые пароли не допускаются");
-            }
+            StringBuilder errorsBuilder = CheckForErrors();
 
             bool isHasAnyErrors = errorsBuilder.Length > 0;
 
@@ -71,10 +58,73 @@ namespace RetailRentingApp.Windows
                 SimpleMessager.ShowError(errorsBuilder.ToString());
                 return;
             }
+            SaveNewUser();
+        }
 
-            string[] credentials = TBoxFullName.Text.Split(' ');
+        private StringBuilder CheckForErrors()
+        {
+            StringBuilder errorsBuilder = new StringBuilder();
+            CheckIfFullNameIsNotEmpty(errorsBuilder);
+            CheckIfPasswordsAreCorrect(errorsBuilder);
+            return errorsBuilder;
+        }
 
-            User user = new User
+        private void SaveNewUser()
+        {
+            PrepareCreatingOfUser();
+            TryCatchSaveChanges();
+        }
+
+        private void PrepareCreatingOfUser()
+        {
+            string[] credentials = GetCredentials();
+
+            User user = CreateNewUser(credentials);
+
+            AppData.Context.Users.Add(user);
+        }
+
+        private void CheckIfPasswordsAreCorrect(StringBuilder errorsBuilder)
+        {
+            if (string.IsNullOrEmpty(PBoxFirstPassword.Password)
+                            || string.IsNullOrEmpty(PBoxPasswordSecond.Password)
+                            || PBoxFirstPassword.Password != PBoxPasswordSecond.Password)
+            {
+                errorsBuilder.AppendLine("Первый пароль должен совпадать со вторым,\n" +
+                    "пустые пароли не допускаются");
+            }
+        }
+
+        private void CheckIfFullNameIsNotEmpty(StringBuilder errorsBuilder)
+        {
+            if (string.IsNullOrEmpty(TBoxFullName.Text))
+            {
+                errorsBuilder.AppendLine("ФИО не может быть пустым");
+            }
+        }
+
+        private void TryCatchSaveChanges()
+        {
+            try
+            {
+                TryToSaveChanges();
+            }
+            catch (Exception ex)
+            {
+                SimpleMessager.ShowError(ex.Message);
+            }
+        }
+
+        private void TryToSaveChanges()
+        {
+            AppData.Context.SaveChanges();
+            MessageBox.Show("Данные успешно сохранены!");
+            AbstractClose();
+        }
+
+        private User CreateNewUser(string[] credentials)
+        {
+            return new User
             {
                 LastName = credentials[0],
                 MiddleName = credentials[1],
@@ -83,19 +133,11 @@ namespace RetailRentingApp.Windows
                 TypeOfUser = ComboWorkerType.SelectedItem as TypeOfUser,
                 Image = currentImage
             };
+        }
 
-            AppData.Context.Users.Add(user);
-
-            try
-            {
-                AppData.Context.SaveChanges();
-                MessageBox.Show("Данные успешно сохранены!");
-                AbstractClose();
-            }
-            catch (Exception ex)
-            {
-                SimpleMessager.ShowError(ex.Message);
-            }
+        private string[] GetCredentials()
+        {
+            return TBoxFullName.Text.Split(' ');
         }
 
         /// <summary>
@@ -105,14 +147,24 @@ namespace RetailRentingApp.Windows
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
 
-            if ((bool)fileDialog.ShowDialog() == true)
+            if (DialogIsFulfilledWithResult(fileDialog))
             {
-                string path = fileDialog.FileName;
-                ImageSource photo = new BitmapImage(new Uri(path));
-                currentImage = File.ReadAllBytes(path);
-                UserImage.Source = photo;
+                AssignImageToUser(fileDialog);
                 SimpleMessager.ShowInfo("Фото успешно прикреплено!");
             }
+        }
+
+        private void AssignImageToUser(OpenFileDialog fileDialog)
+        {
+            string path = fileDialog.FileName;
+            ImageSource photo = new BitmapImage(new Uri(path));
+            currentImage = File.ReadAllBytes(path);
+            UserImage.Source = photo;
+        }
+
+        private static bool DialogIsFulfilledWithResult(OpenFileDialog fileDialog)
+        {
+            return (bool)fileDialog.ShowDialog() == true;
         }
     }
 }
