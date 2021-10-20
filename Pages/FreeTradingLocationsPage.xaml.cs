@@ -19,7 +19,6 @@ namespace RetailRentingApp.Pages
         public FreeTradingLocationsPage()
         {
             InitializeComponent();
-
             UpdateListView();
         }
 
@@ -27,16 +26,42 @@ namespace RetailRentingApp.Pages
         {
             LViewTradingAreas.Items.Clear();
             currentTradingLocations = AppData.Context.TradingAreas.ToList();
+            CheckDateAndFindLocations();
+            OverwhelmListView();
+            RemoveLocationsWithRent();
+        }
 
-            if (FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
-                & FromPicker.SelectedDate < ToPicker.SelectedDate)
+        private void RemoveLocationsWithRent()
+        {
+            currentTradingLocations = currentTradingLocations.Where(l =>
             {
-                currentTradingLocations = currentTradingLocations.Where(l =>
-                {
-                    ICollection<RentingOfTradingArea> rentings = l.RentingOfTradingAreas;
+                DateTime currentDate = DateTime.Now;
+                List<RentingOfTradingArea> locations = l
+                .RentingOfTradingAreas
+                .Where(r => r.StartDate <= currentDate &&
+                       r.EndDate >= currentDate
+                      )
+                .ToList();
 
-                    rentings = rentings
-                    .Where(r => (r.StartDate >= FromPicker.SelectedDate &&
+                return locations.Count == 0;
+            }).ToList();
+        }
+
+        private void CheckDateAndFindLocations()
+        {
+            if (DateIsValid())
+            {
+                FindLocationsInGivenDateInterval();
+            }
+        }
+
+        private void FindLocationsInGivenDateInterval()
+        {
+            currentTradingLocations = currentTradingLocations.Where(l =>
+            {
+                List<RentingOfTradingArea> locations = l
+                .RentingOfTradingAreas
+                .Where(r => (r.StartDate >= FromPicker.SelectedDate &&
                     r.EndDate <= ToPicker.SelectedDate) ||
                     (r.StartDate <= FromPicker.SelectedDate &&
                     r.EndDate >= ToPicker.SelectedDate) ||
@@ -45,13 +70,35 @@ namespace RetailRentingApp.Pages
                     (r.StartDate >= FromPicker.SelectedDate &&
                     r.EndDate >= ToPicker.SelectedDate)
                     )
-                    .ToList();
+                .ToList();
 
-                    return rentings.Count == 0;
-                }).ToList();
-            }
+                return locations.Count == 0;
+            }).ToList();
+        }
 
-            OverwhelmListView();
+        private bool IsAreaHasNotRent(TradingArea l)
+        {
+            ICollection<RentingOfTradingArea> rentings = l.RentingOfTradingAreas;
+
+            rentings = rentings
+            .Where(r => (r.StartDate >= FromPicker.SelectedDate &&
+            r.EndDate <= ToPicker.SelectedDate) ||
+            (r.StartDate <= FromPicker.SelectedDate &&
+            r.EndDate >= ToPicker.SelectedDate) ||
+            (r.StartDate <= FromPicker.SelectedDate &&
+            r.EndDate <= ToPicker.SelectedDate) ||
+            (r.StartDate >= FromPicker.SelectedDate &&
+            r.EndDate >= ToPicker.SelectedDate)
+            )
+            .ToList();
+
+            return rentings.Count == 0;
+        }
+
+        private bool DateIsValid()
+        {
+            return FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
+                            & FromPicker.SelectedDate < ToPicker.SelectedDate;
         }
 
         /// <summary>
@@ -86,12 +133,18 @@ namespace RetailRentingApp.Pages
         {
             TradingArea tradingLocation = currentTradingLocations[0];
             currentTradingLocations = currentTradingLocations.Skip(1).ToList();
-            LViewTradingAreas.Items.Add(tradingLocation);
+            _ = LViewTradingAreas.Items.Add(tradingLocation);
         }
 
-        private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) => UpdateListView();
+        private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateListView();
+        }
 
-        private void ToPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) => UpdateListView();
+        private void ToPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateListView();
+        }
 
         private void BtnClearDates_Click(object sender, RoutedEventArgs e)
         {
@@ -99,14 +152,12 @@ namespace RetailRentingApp.Pages
             UpdateListView();
         }
 
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnStartContract_Click(object sender, RoutedEventArgs e)
         {
+            object context = (sender as Button).DataContext;
+            TradingArea tradingArea = context as TradingArea;
 
-        }
-
-        private void BtnDel_Click(object sender, RoutedEventArgs e)
-        {
-
+            AppData.MainFrame.Navigate(new AddNewRentContractPage(tradingArea));
         }
     }
 }

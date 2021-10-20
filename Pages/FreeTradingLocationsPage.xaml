@@ -137,7 +137,9 @@
                                            Grid.Row="2"></TextBlock>
                                     <Button Content="Начать новый договор"
                                             Style="{StaticResource CommonButton}"
-                                            Width="auto"></Button>
+                                            Width="auto"
+                                            Name="BtnStartContract"
+                                            Click="BtnStartContract_Click"></Button>
                                     <Button Content="Добавить в существующий договор"
                                             Style="{StaticResource CommonButton}"
                                             Width="auto"></Button>
