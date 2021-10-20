@@ -47,5 +47,9 @@ namespace RetailRentingApp.Windows
                 AppData.LoginWindow.Show();
             }
         }
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -95,5 +95,15 @@ namespace RetailRentingApp.Pages
             ToPicker.SelectedDate = FromPicker.SelectedDate = null;
             UpdateListView();
         }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnDel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

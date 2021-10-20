@@ -11,29 +11,37 @@
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto" MinHeight="402.4"></RowDefinition>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Margin="0,0,0,352.4" Grid.RowSpan="1">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Свободные в период с"
-                               Style="{StaticResource HeaderBlock}"></TextBlock>
                     <DatePicker Name="FromPicker"
                                 SelectedDateChanged="FromPicker_SelectedDateChanged"></DatePicker>
                     <TextBlock Text="по"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
                     <DatePicker Name="ToPicker"
                                 SelectedDateChanged="ToPicker_SelectedDateChanged"></DatePicker>
-                    <Button Content="Очистить период дат"
+                    <Button Content="Очистить"
                             Style="{StaticResource CommonButton}"
                             Width="auto"
                             Name="BtnClearDates"
                             Click="BtnClearDates_Click"></Button>
+                    <Button Content="Добавить"
+                            Style="{StaticResource CommonButton}"
+                            Width="auto"
+                            Name="BtnAdd"
+                            Click="BtnAdd_Click"/>
+                    <Button Content="Удалить"
+                            Style="{StaticResource CommonButton}"
+                            Width="auto"
+                            Name="BtnDel"
+                            Click="BtnDel_Click"/>
                 </StackPanel>
             </Grid>
             <!--Grid with the main area.-->
             <Grid Name="UserInputArea"
-                  Grid.Row="1">
+                  Grid.Row="1" Margin="0,0.6,0,-0.4">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource CommonBlock}"
@@ -59,9 +67,8 @@
                 </StackPanel>
             </Grid>
             <ListView x:Name="LViewTradingAreas"
-                      Grid.Row="1"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,50,0,-0.4" Grid.RowSpan="2">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Vertical"></WrapPanel>
