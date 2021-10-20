@@ -16,16 +16,19 @@ namespace RetailRentingApp.Pages
         public AddNewRentContractPage(RentingOfTradingArea renting)
         {
             InitializeComponent();
-            FullfillComboCustomers();
             _renting = renting;
+            FullfillComboCustomers();
         }
 
         private void FullfillComboCustomers()
         {
-            using (RetailRentingBaseEntities context = new RetailRentingBaseEntities())
-            {
-                ComboCustomers.ItemsSource = context.Customers.ToList();
-            }
+            ComboCustomers.ItemsSource = AppData
+                .Context
+                .Customers.ToList();
+            ComboCustomers.SelectedItem = AppData
+                .Context
+                .RentingOfTradingAreas
+                .Find(_renting.Id).Renting.Customer;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -41,18 +44,15 @@ namespace RetailRentingApp.Pages
                 return;
             }
 
-            using (RetailRentingBaseEntities context = new RetailRentingBaseEntities())
-            {
-                UpdateCustomerOfRenting(context);
-                TryToSaveChanges(context);
-            }
+            UpdateCustomerOfRenting();
+            TryToSaveChanges();
         }
 
-        private static void TryToSaveChanges(RetailRentingBaseEntities context)
+        private static void TryToSaveChanges()
         {
             try
             {
-                SaveChangesAndGoBack(context);
+                SaveChangesAndGoBack();
             }
             catch (Exception)
             {
@@ -60,11 +60,12 @@ namespace RetailRentingApp.Pages
             }
         }
 
-        private void UpdateCustomerOfRenting(RetailRentingBaseEntities context)
+        private void UpdateCustomerOfRenting()
         {
-            context.Entry(_renting)
-                                .Entity
-                                .Renting.Customer = ComboCustomers.SelectedItem as Customer;
+            AppData.Context.Entry(_renting)
+                .Entity
+                .Renting.Customer = ComboCustomers
+                                    .SelectedItem as Customer;
         }
 
         private static void ShowCannotRentError()
@@ -73,9 +74,9 @@ namespace RetailRentingApp.Pages
                                     "Пожалуйста, попробуйте ещё раз.");
         }
 
-        private static void SaveChangesAndGoBack(RetailRentingBaseEntities context)
+        private static void SaveChangesAndGoBack()
         {
-            _ = context.SaveChanges();
+            _ = AppData.Context.SaveChanges();
             SimpleMessager.ShowInfo("Торговая точка успешно назначена в аренду клиенту!");
             AppData.MainFrame.GoBack();
         }

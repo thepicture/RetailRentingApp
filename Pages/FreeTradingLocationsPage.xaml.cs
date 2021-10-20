@@ -25,7 +25,7 @@ namespace RetailRentingApp.Pages
         private void UpdateListView()
         {
             LViewTradingAreas.Items.Clear();
-            currentRentings = AppData.Context.RentingOfTradingAreas.ToList();
+                currentRentings = AppData.Context.RentingOfTradingAreas.ToList();
 
             CheckDateAndFindLocations();
             RemoveLocationsWithRent();
@@ -130,6 +130,15 @@ namespace RetailRentingApp.Pages
             RentingOfTradingArea renting = context as RentingOfTradingArea;
 
             _ = AppData.MainFrame.Navigate(new AddNewRentContractPage(renting));
+        }
+
+        private void FreeTradingsPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+                UpdateListView();
+            }
         }
     }
 }
