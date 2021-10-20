@@ -54,7 +54,7 @@
                 <TextBlock Text="Пароль"
                            Style="{StaticResource CommonBlock}"></TextBlock>
                 <Grid Name="PasswordShowGrid">
-                    <PasswordBox Name="PBoxPasswordSecure"></PasswordBox>
+                    <PasswordBox Name="PBoxPasswordSecure" Password="123"></PasswordBox>
                     <TextBox Name="TBoxPasswordInsecure"
                              Visibility="Collapsed"></TextBox>
                 </Grid>

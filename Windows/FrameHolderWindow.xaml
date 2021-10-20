@@ -9,7 +9,6 @@
         Height="550"
         Width="900"
         WindowStartupLocation="CenterScreen">
-    <!--The main purpose of this window is to enable frame integration. It does not make sense as a stand-alone object.-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>

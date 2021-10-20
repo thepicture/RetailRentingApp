@@ -26,7 +26,7 @@ namespace RetailRentingApp.Pages
         private void UpdateListView()
         {
             LViewTradingAreas.Items.Clear();
-            currentTradingLocations = AppData.Context.TradingAreas.Where(t => t.RentingOfTradingAreas.Count() == 0).ToList();
+            currentTradingLocations = AppData.Context.TradingAreas.ToList();
 
             if (FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
                 & FromPicker.SelectedDate < ToPicker.SelectedDate)
@@ -35,16 +35,19 @@ namespace RetailRentingApp.Pages
                 {
                     ICollection<RentingOfTradingArea> rentings = l.RentingOfTradingAreas;
 
-                    rentings = rentings.Where(r => r.EndDate <= FromPicker.SelectedDate && r.StartDate >= ToPicker.SelectedDate).ToList();
+                    rentings = rentings
+                    .Where(r => (r.StartDate >= FromPicker.SelectedDate &&
+                    r.EndDate <= ToPicker.SelectedDate) ||
+                    (r.StartDate <= FromPicker.SelectedDate &&
+                    r.EndDate >= ToPicker.SelectedDate) ||
+                    (r.StartDate <= FromPicker.SelectedDate &&
+                    r.EndDate <= ToPicker.SelectedDate) ||
+                    (r.StartDate >= FromPicker.SelectedDate &&
+                    r.EndDate >= ToPicker.SelectedDate)
+                    )
+                    .ToList();
 
-                    if (rentings.Count > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return rentings.Count == 0;
                 }).ToList();
             }
 
