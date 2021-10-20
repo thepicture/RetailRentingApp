@@ -45,7 +45,7 @@ namespace RetailRentingApp.Pages
 
         private void GoToAddRentPage()
         {
-            throw new NotImplementedException();
+            AppData.MainFrame.Navigate(new AddNewRentForCustomerPage(_renting));
         }
 
         private static void ShowNoClientSpecifiedError()

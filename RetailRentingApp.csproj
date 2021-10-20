@@ -120,6 +120,9 @@
     <Compile Include="Pages\AddNewRentContractPage.xaml.cs">
       <DependentUpon>AddNewRentContractPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddNewRentForCustomerPage.xaml.cs">
+      <DependentUpon>AddNewRentForCustomerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FreeTradingLocationsPage.xaml.cs">
       <DependentUpon>FreeTradingLocationsPage.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Pages\AddNewRentContractPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddNewRentForCustomerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
