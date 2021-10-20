@@ -1,6 +1,7 @@
 ﻿using RetailRentingApp.Classes;
 using RetailRentingApp.Pages;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace RetailRentingApp.Windows
 {
@@ -15,7 +16,7 @@ namespace RetailRentingApp.Windows
 
             AppData.MainFrame = MainFrame;
 
-            MainFrame.Navigate(new MainUserPage());
+            _ = MainFrame.Navigate(new MainUserPage());
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -28,14 +29,9 @@ namespace RetailRentingApp.Windows
 
         private void MainFrame_ContentRendered(object sender, System.EventArgs e)
         {
-            if (AppData.MainFrame.CanGoBack)
-            {
-                BtnBack.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                BtnBack.Visibility = Visibility.Hidden;
-            }
+            Title = (MainFrame.Content as Page).Title;
+
+            BtnBack.Visibility = AppData.MainFrame.CanGoBack ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
@@ -46,10 +42,6 @@ namespace RetailRentingApp.Windows
                 LoginWindowUtils.ClearContext();
                 AppData.LoginWindow.Show();
             }
-        }
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
