@@ -126,6 +126,9 @@
     <Compile Include="Pages\MainUserPage.xaml.cs">
       <DependentUpon>MainUserPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ModifyRentOfCustomerPage.xaml.cs">
+      <DependentUpon>ModifyRentOfCustomerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FrameHolderWindow.xaml.cs">
       <DependentUpon>FrameHolderWindow.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ModifyRentOfCustomerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
