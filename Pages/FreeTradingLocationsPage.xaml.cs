@@ -15,7 +15,7 @@ namespace RetailRentingApp.Pages
     public partial class FreeTradingLocationsPage : Page
     {
         private readonly TimeSpan UPDATE_INTERVAL = TimeSpan.FromMilliseconds(500);
-        private List<TradingArea> currentTradingLocations = new List<TradingArea>();
+        private List<RentingOfTradingArea> currentRentings = new List<RentingOfTradingArea>();
         public FreeTradingLocationsPage()
         {
             InitializeComponent();
@@ -25,25 +25,22 @@ namespace RetailRentingApp.Pages
         private void UpdateListView()
         {
             LViewTradingAreas.Items.Clear();
-            currentTradingLocations = AppData.Context.TradingAreas.ToList();
+            currentRentings = AppData.Context.RentingOfTradingAreas.ToList();
+
             CheckDateAndFindLocations();
-            OverwhelmListView();
             RemoveLocationsWithRent();
+
+            OverwhelmListView();
         }
 
         private void RemoveLocationsWithRent()
         {
-            currentTradingLocations = currentTradingLocations.Where(l =>
+            currentRentings = currentRentings.Where(r =>
             {
                 DateTime currentDate = DateTime.Now;
-                List<RentingOfTradingArea> locations = l
-                .RentingOfTradingAreas
-                .Where(r => r.StartDate <= currentDate &&
-                       r.EndDate >= currentDate
-                      )
-                .ToList();
 
-                return locations.Count == 0;
+                return r.StartDate > currentDate ||
+                       r.EndDate < currentDate;
             }).ToList();
         }
 
@@ -57,42 +54,14 @@ namespace RetailRentingApp.Pages
 
         private void FindLocationsInGivenDateInterval()
         {
-            currentTradingLocations = currentTradingLocations.Where(l =>
-            {
-                List<RentingOfTradingArea> locations = l
-                .RentingOfTradingAreas
-                .Where(r => (r.StartDate >= FromPicker.SelectedDate &&
+            currentRentings = currentRentings.Where(r => (r.StartDate >= FromPicker.SelectedDate &&
                     r.EndDate <= ToPicker.SelectedDate) ||
                     (r.StartDate <= FromPicker.SelectedDate &&
                     r.EndDate >= ToPicker.SelectedDate) ||
                     (r.StartDate <= FromPicker.SelectedDate &&
                     r.EndDate <= ToPicker.SelectedDate) ||
                     (r.StartDate >= FromPicker.SelectedDate &&
-                    r.EndDate >= ToPicker.SelectedDate)
-                    )
-                .ToList();
-
-                return locations.Count == 0;
-            }).ToList();
-        }
-
-        private bool IsAreaHasNotRent(TradingArea l)
-        {
-            ICollection<RentingOfTradingArea> rentings = l.RentingOfTradingAreas;
-
-            rentings = rentings
-            .Where(r => (r.StartDate >= FromPicker.SelectedDate &&
-            r.EndDate <= ToPicker.SelectedDate) ||
-            (r.StartDate <= FromPicker.SelectedDate &&
-            r.EndDate >= ToPicker.SelectedDate) ||
-            (r.StartDate <= FromPicker.SelectedDate &&
-            r.EndDate <= ToPicker.SelectedDate) ||
-            (r.StartDate >= FromPicker.SelectedDate &&
-            r.EndDate >= ToPicker.SelectedDate)
-            )
-            .ToList();
-
-            return rentings.Count == 0;
+                    r.EndDate >= ToPicker.SelectedDate)).ToList();
         }
 
         private bool DateIsValid()
@@ -117,11 +86,13 @@ namespace RetailRentingApp.Pages
 
         private void TimerForListView(object sender, EventArgs e)
         {
-            bool hasAnyMoreAreas = currentTradingLocations.Count != 0;
+            bool hasAnyMoreAreas = currentRentings.Count != 0;
 
             if (!hasAnyMoreAreas)
             {
-                ((DispatcherTimer)sender).Stop();
+                DispatcherTimer timer = (DispatcherTimer)sender;
+
+                timer.Stop();
 
                 return;
             }
@@ -131,9 +102,9 @@ namespace RetailRentingApp.Pages
 
         private void AddAnotherArea()
         {
-            TradingArea tradingLocation = currentTradingLocations[0];
-            currentTradingLocations = currentTradingLocations.Skip(1).ToList();
-            _ = LViewTradingAreas.Items.Add(tradingLocation);
+            RentingOfTradingArea renting = currentRentings[0];
+            currentRentings = currentRentings.Skip(1).ToList();
+            _ = LViewTradingAreas.Items.Add(renting);
         }
 
         private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -154,10 +125,11 @@ namespace RetailRentingApp.Pages
 
         private void BtnStartContract_Click(object sender, RoutedEventArgs e)
         {
-            object context = (sender as Button).DataContext;
-            TradingArea tradingArea = context as TradingArea;
+            Button button = sender as Button;
+            object context = button.DataContext;
+            RentingOfTradingArea renting = context as RentingOfTradingArea;
 
-            AppData.MainFrame.Navigate(new AddNewRentContractPage(tradingArea));
+            _ = AppData.MainFrame.Navigate(new AddNewRentContractPage(renting));
         }
     }
 }
