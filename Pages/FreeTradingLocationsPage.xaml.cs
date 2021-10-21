@@ -14,7 +14,10 @@ namespace RetailRentingApp.Pages
     /// </summary>
     public partial class FreeTradingLocationsPage : Page
     {
-        private readonly TimeSpan UPDATE_INTERVAL = TimeSpan.FromMilliseconds(500);
+        private readonly TimeSpan UPDATE_INTERVAL = TimeSpan
+            .FromMilliseconds(
+                Properties.Settings.Default.UPDATE_INTERVAL
+            );
         private List<RentingOfTradingArea> currentRentings = new List<RentingOfTradingArea>();
         public FreeTradingLocationsPage()
         {
