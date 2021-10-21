@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace RetailRentingApp.Classes
 {
@@ -13,36 +8,36 @@ namespace RetailRentingApp.Classes
     public class SimpleMessager
     {
         /// <summary>
-        /// The simple proxy for MessageBox class to simplify error statements.
+        /// The simple proxy for the MessageBox class to simplify error statements.
         /// </summary>
-        /// <param name="message">An error message for user.</param>
+        /// <param name="message">An error message for a user.</param>
         public static void ShowError(string message)
         {
-            MessageBox.Show(message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            _ = MessageBox.Show(message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         /// <summary>
-        /// The simple proxy for MessageBox class to simplify "if" statements.
+        /// The simple proxy for the MessageBox class to simplify "if" statements.
         /// </summary>
-        /// <param name="message">An asking message for user.</param>
-        /// <returns>The bool result of user's choice.</returns>
+        /// <param name="message">An asking message for a user.</param>
+        /// <returns>A bool result of an user's choice.</returns>
         public static bool ShowQuestion(string message)
         {
-            MessageBoxResult result = MessageBox.Show(message, 
+            MessageBoxResult result = MessageBox.Show(message,
                 "Внимание",
-                MessageBoxButton.YesNo, 
+                MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
 
             return result == MessageBoxResult.Yes;
         }
 
         /// <summary>
-        /// Shows an message information to the user.
+        /// Shows a message information to a user.
         /// </summary>
-        /// <param name="message">An information message for user.</param>
+        /// <param name="message">An information message for a user.</param>
         internal static void ShowInfo(string message)
         {
-            MessageBox.Show(message,
+            _ = MessageBox.Show(message,
                 "Информация",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);

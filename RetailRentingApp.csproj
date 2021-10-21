@@ -110,6 +110,7 @@
     <Compile Include="Backend\User.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\ListViewOverwhelmer.cs" />
     <Compile Include="Classes\LoginWindowUtils.cs" />
     <Compile Include="Classes\PartialTradingArea.cs" />
     <Compile Include="Classes\SimpleDbObjectGenerator.cs" />
