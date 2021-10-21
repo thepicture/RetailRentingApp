@@ -120,6 +120,9 @@
     <Compile Include="Classes\TitleInitalizer.cs" />
     <Compile Include="Classes\TradingAreaDescriptiveGenerator.cs" />
     <Compile Include="Interfaces\IDescriptiveGenerator.cs" />
+    <Compile Include="Pages\AddEditTradingAreaPage.xaml.cs">
+      <DependentUpon>AddEditTradingAreaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddNewRentContractPage.xaml.cs">
       <DependentUpon>AddNewRentContractPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
     <Compile Include="Windows\RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\AddEditTradingAreaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AddNewRentContractPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

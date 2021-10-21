@@ -30,5 +30,10 @@ namespace RetailRentingApp.Pages
         {
 
         }
+
+        private void BtnAddTrading_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

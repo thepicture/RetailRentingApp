@@ -48,6 +48,11 @@
                             Width="auto"
                             Name="BtnClearFiltration"
                             Click="BtnClearFiltration_Click"></Button>
+                    <Button x:Name="BtnAddTrading"
+                            Width="auto"
+                            Content="Добавить"
+                            Click="BtnAddTrading_Click"
+                            Style="{StaticResource CommonButton}"/>
                     <TextBlock Text="{Binding ElementName=LViewTradingAreas, Path=Items.Count, StringFormat={}Выведено {0} записей}"
                            HorizontalAlignment="Right"
                            Margin="5"
