@@ -34,5 +34,15 @@ namespace RetailRentingApp.Pages
         {
             _ = AppData.MainFrame.Navigate(new RentTradingLocationsPage());
         }
+
+        private void BtnGoToTradingLocationsPage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenTradingLocationsWindow();
+        }
+
+        private void OpenTradingLocationsWindow()
+        {
+            _ = AppData.MainFrame.Navigate(new TradingLocationsPage());
+        }
     }
 }

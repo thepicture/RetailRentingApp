@@ -15,7 +15,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <WrapPanel Orientation="Horizontal">
+                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Название"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
@@ -61,7 +61,7 @@
                       Grid.Row="1">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical"></WrapPanel>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
@@ -133,51 +133,76 @@
                                     </BeginStoryboard>
                                 </EventTrigger>
                             </Grid.Triggers>
-                            <Grid Background="MediumPurple" Opacity=".2" HorizontalAlignment="Stretch"></Grid>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Grid.Column="0"
-                                   HorizontalAlignment="Left"
-                                   Width="200"
-                                   Height="200"
+                            <Grid>
+                                <Grid Panel.ZIndex="1">
+                                    <Grid.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0"
+                                                             EndPoint="0.5,.5"
+                                                             Opacity=".6">
+                                            <GradientStop Color="Transparent"></GradientStop>
+                                            <GradientStop Color="Black"
+                                                      Offset="1"></GradientStop>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>
+                                </Grid>
+                                <Image
                                    Stretch="UniformToFill"
                                    Source="{Binding Image}"
-                                   Margin="10">
+                                   Width="400"
+                                   Height="400">
+                                <Image.Clip>
+                                    <RectangleGeometry Rect="0,0,400,400"
+                                                       RadiusX="20"
+                                                       RadiusY="20"></RectangleGeometry>
+                                </Image.Clip>
                                 </Image>
+                            </Grid>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{Binding Name}"
                                            FontSize="20"
                                            FontWeight="Bold"
                                            Margin="5"
+                                           Foreground="White"
                                            TextWrapping="Wrap"></TextBlock>
                                     <TextBlock Text="{Binding IsAirVentingText}"
-                                           FontSize="15"
-                                           Margin="5"
-                                           Grid.Row="1"></TextBlock>
+                                               TextAlignment="Center"
+                                               FontSize="15"
+                                               Margin="5"
+                                               Grid.Row="1"
+                                               Foreground="White"></TextBlock>
                                     <TextBlock Text="{Binding Floor, StringFormat={}{0} этаж}"
-                                           FontSize="15"
+                                               FontSize="15"
+                                               Margin="5"
+                                               Grid.Row="2"
+                                               TextAlignment="Center"
+                                               Foreground="White"></TextBlock>
+                                <TextBlock Text="{Binding CostPerDay, StringFormat={}{0:N2} руб/день}"
+                                           FontSize="20"
                                            Margin="5"
-                                           Grid.Row="2"></TextBlock>
+                                           FontWeight="Bold"
+                                           TextAlignment="Center"
+                                           Foreground="White"></TextBlock>
+                                <TextBlock Text="{Binding AreaInSquareMeters, StringFormat={}{0} кв. м.}"
+                                           FontSize="20"
+                                           Margin="5"
+                                           TextAlignment="Center"
+                                           FontWeight="Bold"
+                                           Foreground="White"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Bottom"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
                                     <Button Content="Изменить"
                                             Style="{StaticResource CommonButton}"
-                                            Width="auto"
                                             Name="BtnModifyTradingArea"
                                             Click="BtnModifyTradingArea_Click"></Button>
                                     <Button Content="Удалить"
                                             Style="{StaticResource CommonButton}"
-                                            Width="auto"
                                             Name="BtnDeleteTradingArea"
                                             Click="BtnDeleteTradingArea_Click"></Button>
-                                </StackPanel>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,40,0">
-                                <TextBlock Text="{Binding CostPerDay, StringFormat={}{0:N2} руб/день}"
-                                           FontSize="20"
-                                           Margin="5"
-                                           FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding AreaInSquareMeters, StringFormat={}{0} кв. м.}"
-                                           FontSize="20"
-                                           Margin="5"
-                                           FontWeight="Bold"></TextBlock>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
