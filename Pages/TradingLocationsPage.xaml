@@ -21,30 +21,37 @@
                         <TextBlock Text="Название"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
                         <TextBox Name="NameBox"
-                             Height="20"></TextBox>
+                             Height="20"
+                                 TextChanged="NameBox_TextChanged"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Этаж"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
                         <TextBox Name="FloorBox"
                              Height="20"
-                             MaxLength="2"></TextBox>
+                             MaxLength="2"
+                                 TextChanged="FloorBox_TextChanged"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Количество квадратных метров с"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
                         <TextBox Name="MinAreaInSquareMeters"
                              Height="20"
-                             MaxLength="2"></TextBox>
+                             MaxLength="2"
+                                 TextChanged="MinAreaInSquareMeters_TextChanged"></TextBox>
                         <TextBlock Text="по"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
                         <TextBox Name="MaxAreaInSquareMeters"
                              Height="20"
-                             MaxLength="2"></TextBox>
+                             MaxLength="2"
+                                 TextChanged="MaxAreaInSquareMeters_TextChanged"></TextBox>
                     </StackPanel>
                     <CheckBox Content="Кондиционер"
                               IsChecked="True"
-                              VerticalAlignment="Center"></CheckBox>
+                              VerticalAlignment="Center"
+                              Name="IsAirVenting"
+                              Checked="IsAirVenting_Checked"
+                              Unchecked="IsAirVenting_Unchecked"></CheckBox>
                     <Button Content="Очистить"
                             Style="{StaticResource CommonButton}"
                             Width="auto"
