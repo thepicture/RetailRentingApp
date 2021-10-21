@@ -96,7 +96,9 @@
                     </Grid>
                     <Grid Grid.Row="1"
                           Background="LightGray">
-                        <Button Style="{StaticResource MainUserWindowButton}">Арендуемые торговые точки</Button>
+                        <Button Style="{StaticResource MainUserWindowButton}"
+                                Name="BtnGoToRentingPage"
+                                Click="BtnGoToRentingPage_Click">Арендуемые торговые точки</Button>
                     </Grid>
                     <Grid Grid.Row="2">
                         <Button Style="{StaticResource MainUserWindowButton}">Торговые точки</Button>

@@ -56,28 +56,12 @@ namespace RetailRentingApp.Pages
 
         private void CheckDateAndFindLocations()
         {
-            if (DateIsValid())
+            if (DateValidationChecker.IsDateIntervalValid(FromPicker, ToPicker))
             {
-                FindLocationsInGivenDateInterval();
+                LocationsInGivenTimeIntervalUtils.FindLocationsInGivenDateInterval(currentRentings,
+                                                                                   FromPicker,
+                                                                                   ToPicker);
             }
-        }
-
-        private void FindLocationsInGivenDateInterval()
-        {
-            currentRentings = currentRentings.Where(r => (r.StartDate >= FromPicker.SelectedDate &&
-                    r.EndDate <= ToPicker.SelectedDate) ||
-                    (r.StartDate <= FromPicker.SelectedDate &&
-                    r.EndDate >= ToPicker.SelectedDate) ||
-                    (r.StartDate <= FromPicker.SelectedDate &&
-                    r.EndDate <= ToPicker.SelectedDate) ||
-                    (r.StartDate >= FromPicker.SelectedDate &&
-                    r.EndDate >= ToPicker.SelectedDate)).ToList();
-        }
-
-        private bool DateIsValid()
-        {
-            return FromPicker.SelectedDate != null && ToPicker.SelectedDate != null
-                            & FromPicker.SelectedDate < ToPicker.SelectedDate;
         }
 
         private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
