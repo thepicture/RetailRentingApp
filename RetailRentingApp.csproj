@@ -138,6 +138,9 @@
     <Compile Include="Pages\RentTradingLocationsPage.xaml.cs">
       <DependentUpon>RentTradingLocationsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TradingLocationsPage.xaml.cs">
+      <DependentUpon>TradingLocationsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Windows\FrameHolderWindow.xaml.cs">
       <DependentUpon>FrameHolderWindow.xaml</DependentUpon>
@@ -166,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RentTradingLocationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TradingLocationsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
