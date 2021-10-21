@@ -1,4 +1,5 @@
-﻿using RetailRentingApp.Classes;
+﻿using RetailRentingApp.Backend;
+using RetailRentingApp.Classes;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,7 +19,10 @@ namespace RetailRentingApp.Pages
 
         private void BtnModifyTradingArea_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+            TradingArea tradingArea = button.DataContext as TradingArea;
 
+            _ = AppData.MainFrame.Navigate(new AddEditTradingAreaPage(tradingArea));
         }
 
         private void BtnDeleteTradingArea_Click(object sender, RoutedEventArgs e)
@@ -33,7 +37,7 @@ namespace RetailRentingApp.Pages
 
         private void BtnAddTrading_Click(object sender, RoutedEventArgs e)
         {
-
+            AppData.MainFrame.Navigate(new AddEditTradingAreaPage(null));
         }
     }
 }

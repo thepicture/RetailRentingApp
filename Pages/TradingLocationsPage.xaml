@@ -42,7 +42,8 @@
                              MaxLength="2"></TextBox>
                     </StackPanel>
                     <CheckBox Content="Кондиционер"
-                              IsChecked="True"></CheckBox>
+                              IsChecked="True"
+                              VerticalAlignment="Center"></CheckBox>
                     <Button Content="Очистить"
                             Style="{StaticResource CommonButton}"
                             Width="auto"

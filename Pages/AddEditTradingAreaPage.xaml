@@ -12,28 +12,43 @@
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center" Width="451">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Имя торговой точки" Style="{StaticResource CommonBlock}"></TextBlock>
-                <TextBox MaxLength="100"></TextBox>
+                <TextBlock Text="Наименование торговой точки" Style="{StaticResource CommonBlock}"></TextBlock>
+                <TextBox MaxLength="100" Text="{Binding Name}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Наличие кондиционера" Style="{StaticResource CommonBlock}"></TextBlock>
-                <CheckBox></CheckBox>
+                <CheckBox IsChecked="{Binding IsAirVenting}"></CheckBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Этаж" Style="{StaticResource CommonBlock}"></TextBlock>
-                <TextBox MaxLength="100"></TextBox>
+                <TextBox MaxLength="100" Text="{Binding Floor}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Стоимость" Style="{StaticResource CommonBlock}"></TextBlock>
-                <TextBox MaxLength="100"></TextBox>
+                <TextBox MaxLength="100" Text="{Binding CostPerDay, StringFormat={}{0:F0}}"></TextBox>
+                <TextBlock Margin="5"
+                           Text="руб."></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Площадь" Style="{StaticResource CommonBlock}"></TextBlock>
-                <TextBox MaxLength="100"></TextBox>
+                <TextBox MaxLength="100" Text="{Binding AreaInSquareMeters, StringFormat={}{0:N0}}"></TextBox>
+                <TextBlock Margin="5"
+                           Text="кв.м."></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="149">
-                <Button Content="Добавить фото" Height="30"></Button>
-                <Image></Image>
+                <Button Content="Изменить фото" Height="20"></Button>
+                    <Image Width="100"
+                       Height="100"
+                       HorizontalAlignment="Right"
+                       Stretch="UniformToFill">
+                    <Image.Source>
+                        <Binding Path="Image">
+                            <Binding.TargetNullValue>
+                                Resources/noImagePurple.png
+                            </Binding.TargetNullValue>
+                        </Binding>
+                    </Image.Source>
+                    </Image>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button Content="Добавить"></Button>

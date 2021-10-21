@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RetailRentingApp.Backend;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,25 @@ namespace RetailRentingApp.Pages
     /// </summary>
     public partial class AddEditTradingAreaPage : Page
     {
-        public AddEditTradingAreaPage()
+        public TradingArea _tradingArea = new TradingArea();
+        public AddEditTradingAreaPage(TradingArea tradingArea)
         {
             InitializeComponent();
+            SetDataContext(tradingArea);
+        }
+
+        private void SetDataContext(TradingArea tradingArea)
+        {
+            InitTradingArea(tradingArea);
+            DataContext = _tradingArea;
+        }
+
+        private void InitTradingArea(TradingArea tradingArea)
+        {
+            if (tradingArea != null)
+            {
+                _tradingArea = tradingArea;
+            }
         }
     }
 }
