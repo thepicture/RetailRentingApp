@@ -6,8 +6,9 @@
       xmlns:local="clr-namespace:RetailRentingApp.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Торговые точки">
-
+      Title="Торговые точки"
+      Name="TradingLocationsPage_"
+      IsVisibleChanged="TradingLocationsPage__IsVisibleChanged">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -61,7 +62,7 @@
                            FontSize="20"></TextBlock>
                 </WrapPanel>
             </Grid>
-            <ListView x:Name="LViewTradingAreas"
+            <ListView x:Name="LViewTradingLocations"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       Grid.Row="1">

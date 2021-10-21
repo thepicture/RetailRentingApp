@@ -13,34 +13,43 @@
                     VerticalAlignment="Center" Width="451">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Наименование торговой точки" Style="{StaticResource CommonBlock}"></TextBlock>
-                <TextBox MaxLength="100" Text="{Binding Name}"></TextBox>
+                <TextBox MaxLength="100" Text="{Binding Name}"
+                         Name="NameBox"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Наличие кондиционера" Style="{StaticResource CommonBlock}"></TextBlock>
-                <CheckBox IsChecked="{Binding IsAirVenting}"></CheckBox>
+                <CheckBox IsChecked="{Binding IsAirVenting}"
+                          Name="CheckIsAirVenting"></CheckBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Этаж" Style="{StaticResource CommonBlock}"></TextBlock>
-                <TextBox MaxLength="100" Text="{Binding Floor}"></TextBox>
+                <TextBox MaxLength="100" Text="{Binding Floor}"
+                         Name="FloorBox"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Стоимость" Style="{StaticResource CommonBlock}"></TextBlock>
-                <TextBox MaxLength="100" Text="{Binding CostPerDay, StringFormat={}{0:F0}}"></TextBox>
+                <TextBox MaxLength="100" Text="{Binding CostPerDay, StringFormat={}{0:F0}}"
+                         Name="PriceBox"></TextBox>
                 <TextBlock Margin="5"
                            Text="руб."></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Площадь" Style="{StaticResource CommonBlock}"></TextBlock>
-                <TextBox MaxLength="100" Text="{Binding AreaInSquareMeters, StringFormat={}{0:N0}}"></TextBox>
+                <TextBox MaxLength="100"
+                         Text="{Binding AreaInSquareMeters, StringFormat={}{0:N0}}"
+                         Name="AreaBox"></TextBox>
                 <TextBlock Margin="5"
                            Text="кв.м."></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="149">
-                <Button Content="Изменить фото" Height="20"></Button>
+                <Button Content="Изменить фото" Height="20"
+                        Name="BtnChangeImage"
+                        Click="BtnChangeImage_Click"></Button>
                     <Image Width="100"
                        Height="100"
                        HorizontalAlignment="Right"
-                       Stretch="UniformToFill">
+                       Stretch="UniformToFill"
+                       Name="TradingAreaImage">
                     <Image.Source>
                         <Binding Path="Image">
                             <Binding.TargetNullValue>
@@ -51,8 +60,12 @@
                     </Image>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Content="Добавить"></Button>
-                <Button Content="Отмена"></Button>
+                <Button Content="Завершить редактирование"
+                        Name="BtnAddOrEditTradingArea"
+                        Click="BtnAddOrEditTradingArea_Click"></Button>
+                <Button Content="Отмена"
+                        Name="BtnCancel"
+                        Click="BtnCancel_Click"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>
