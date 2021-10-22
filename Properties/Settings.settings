@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="UPDATE_INTERVAL" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">500</Value>
+      <Value Profile="(Default)">300</Value>
     </Setting>
   </Settings>
 </SettingsFile>
