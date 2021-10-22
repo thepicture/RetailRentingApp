@@ -106,7 +106,9 @@
                                 Click="BtnGoToTradingLocationsPage_Click">Торговые точки</Button>
                     </Grid>
                     <Grid Grid.Row="3" Background="LightGray">
-                        <Button Style="{StaticResource MainUserWindowButton}">Аренда</Button>
+                        <Button Style="{StaticResource MainUserWindowButton}"
+                                Name="BtnGoToRentsPage"
+                                Click="BtnGoToRentsPage_Click">Аренда</Button>
                     </Grid>
                     <Grid Grid.Row="4">
                         <Button Style="{StaticResource MainUserWindowButton}">Оплата</Button>

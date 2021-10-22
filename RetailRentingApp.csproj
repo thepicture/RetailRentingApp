@@ -138,6 +138,9 @@
     <Compile Include="Pages\ModifyRentOfCustomerPage.xaml.cs">
       <DependentUpon>ModifyRentOfCustomerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RentsPage.xaml.cs">
+      <DependentUpon>RentsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RentTradingLocationsPage.xaml.cs">
       <DependentUpon>RentTradingLocationsPage.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ModifyRentOfCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

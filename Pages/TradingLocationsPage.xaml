@@ -10,176 +10,175 @@
       Name="TradingLocationsPage_"
       IsVisibleChanged="TradingLocationsPage__IsVisibleChanged">
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Название"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Название"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
-                        <TextBox Name="NameBox"
+                    <TextBox Name="NameBox"
                              Height="20"
                                  TextChanged="NameBox_TextChanged"></TextBox>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Этаж"
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Этаж"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
-                        <TextBox Name="FloorBox"
+                    <TextBox Name="FloorBox"
                              Height="20"
                              MaxLength="2"
                                  TextChanged="FloorBox_TextChanged"></TextBox>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Количество квадратных метров с"
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Количество квадратных метров с"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
-                        <TextBox Name="MinAreaInSquareMeters"
+                    <TextBox Name="MinAreaInSquareMeters"
                              Height="20"
                              MaxLength="2"
                                  TextChanged="MinAreaInSquareMeters_TextChanged"></TextBox>
-                        <TextBlock Text="по"
+                    <TextBlock Text="по"
                                Style="{StaticResource HeaderBlock}"></TextBlock>
-                        <TextBox Name="MaxAreaInSquareMeters"
+                    <TextBox Name="MaxAreaInSquareMeters"
                              Height="20"
                              MaxLength="2"
                                  TextChanged="MaxAreaInSquareMeters_TextChanged"></TextBox>
-                    </StackPanel>
-                    <StackPanel>
-                        
+                </StackPanel>
+                <StackPanel>
+
                     <CheckBox Content="С кондиционером"
                               IsChecked="True"
                               VerticalAlignment="Center"
                               Name="IsAirVenting"
                               Checked="IsAirVenting_Checked"
                               Unchecked="IsAirVenting_Unchecked"></CheckBox>
-                        <CheckBox Content="Без кондиционера"
+                    <CheckBox Content="Без кондиционера"
                               IsChecked="True"
                               VerticalAlignment="Center"
                               Name="FalseThatIsAirVenting"
                               Checked="FalseThatIsAirVenting_Checked"
                               Unchecked="FalseThatIsAirVenting_Unchecked"></CheckBox>
-                    </StackPanel>
-                    <TextBlock Text="{Binding ElementName=LViewTradingLocations, Path=Items.Count, StringFormat={}Выведено {0} записей}"
+                </StackPanel>
+                <TextBlock Text="{Binding ElementName=LViewTradingLocations, Path=Items.Count, StringFormat={}Выведено {0} записей}"
                            HorizontalAlignment="Right"
                            Margin="5"
                            Style="{StaticResource CommonBlock}"
                            FontSize="20"></TextBlock>
-                    <Button Content="Очистить"
+                <Button Content="Очистить"
                             Style="{StaticResource CommonButton}"
                             Width="auto"
                             Name="BtnClearFiltration"
                             Click="BtnClearFiltration_Click"></Button>
-                    <Button x:Name="BtnAddTrading"
+                <Button x:Name="BtnAddTrading"
                             Width="auto"
                             Content="Добавить"
                             Click="BtnAddTrading_Click"
                             Style="{StaticResource CommonButton}"/>
-                    <TextBlock Text="{Binding ElementName=LViewTradingAreas, Path=Items.Count, StringFormat={}Выведено {0} записей}"
+                <TextBlock Text="{Binding ElementName=LViewTradingAreas, Path=Items.Count, StringFormat={}Выведено {0} записей}"
                            HorizontalAlignment="Right"
                            Margin="5"
                            Style="{StaticResource CommonBlock}"
                            FontSize="20"></TextBlock>
-                </WrapPanel>
-            </Grid>
-            <ListView x:Name="LViewTradingLocations"
+            </WrapPanel>
+        </Grid>
+        <ListView x:Name="LViewTradingLocations"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       Grid.Row="1">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type local:FreeTradingLocationsPage}}}"
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type local:FreeTradingLocationsPage}}}"
                               Margin="10"
                               Opacity="0"
                               RenderTransformOrigin="0.5,0.5">
-                            <Grid.RenderTransform>
-                                <ScaleTransform></ScaleTransform>
-                            </Grid.RenderTransform>
-                            <Grid.Triggers>
-                                <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1"
+                        <Grid.RenderTransform>
+                            <ScaleTransform></ScaleTransform>
+                        </Grid.RenderTransform>
+                        <Grid.Triggers>
+                            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation From="1"
                                                              To="1.01"
                                                              Storyboard.TargetProperty="RenderTransform.ScaleX"
                                                              Duration="0:0:0.5">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CircleEase EasingMode="EaseOut"></CircleEase>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                            <DoubleAnimation From="1"
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"></CircleEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation From="1"
                                                              To="1.01"
                                                              Storyboard.TargetProperty="RenderTransform.ScaleY"
                                                              Duration="0:0:0.5">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CircleEase EasingMode="EaseOut"></CircleEase>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1.01"
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"></CircleEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation From="1.01"
                                                              To="1"
                                                              Storyboard.TargetProperty="RenderTransform.ScaleX"
                                                              Duration="0:0:0.5">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CircleEase EasingMode="EaseOut"></CircleEase>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                            <DoubleAnimation From="1.01"
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"></CircleEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation From="1.01"
                                                              To="1"
                                                              Storyboard.TargetProperty="RenderTransform.ScaleY"
                                                              Duration="0:0:0.5">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CircleEase EasingMode="EaseOut"></CircleEase>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="0"
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"></CircleEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation From="0"
                                                              To="1"
                                                              Duration="0:0:1"
                                                              Storyboard.TargetProperty="Opacity">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CircleEase EasingMode="EaseOut"></CircleEase>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Grid.Triggers>
-                            <Grid>
-                                <Grid Panel.ZIndex="1">
-                                    <Grid.Clip>
-                                        <RectangleGeometry Rect="0,0,400,400"
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"></CircleEase>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Grid.Triggers>
+                        <Grid>
+                            <Grid Panel.ZIndex="1">
+                                <Grid.Clip>
+                                    <RectangleGeometry Rect="0,0,400,400"
                                                        RadiusX="30"
                                                        RadiusY="20">
-                                        </RectangleGeometry>
-                                    </Grid.Clip>
-                                    <Grid.Background>
-                                        <LinearGradientBrush StartPoint="0.5,0"
+                                    </RectangleGeometry>
+                                </Grid.Clip>
+                                <Grid.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0"
                                                              EndPoint="0.5,.5"
                                                              Opacity=".6">
-                                            <GradientStop Color="Transparent"></GradientStop>
-                                            <GradientStop Color="Black"
+                                        <GradientStop Color="Transparent"></GradientStop>
+                                        <GradientStop Color="Black"
                                                       Offset="1"></GradientStop>
-                                        </LinearGradientBrush>
-                                    </Grid.Background>
-                                </Grid>
-                                <Image
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                            </Grid>
+                            <Image
                                    Stretch="UniformToFill"
                                    Source="{Binding Image}"
                                    Width="400"
@@ -190,24 +189,24 @@
                                                        RadiusY="20">
                                     </RectangleGeometry>
                                 </Image.Clip>
-                                </Image>
-                            </Grid>
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Center"
+                            </Image>
+                        </Grid>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center"
                                         HorizontalAlignment="Center">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Name}"
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Name}"
                                            FontSize="20"
                                            FontWeight="Bold"
                                            Margin="5"
                                            Foreground="White"
                                            TextWrapping="Wrap"></TextBlock>
-                                    <TextBlock Text="{Binding IsAirVentingText}"
+                                <TextBlock Text="{Binding IsAirVentingText}"
                                                TextAlignment="Center"
                                                FontSize="15"
                                                Margin="5"
                                                Grid.Row="1"
                                                Foreground="White"></TextBlock>
-                                    <TextBlock Text="{Binding Floor, StringFormat={}{0} этаж}"
+                                <TextBlock Text="{Binding Floor, StringFormat={}{0} этаж}"
                                                FontSize="15"
                                                Margin="5"
                                                Grid.Row="2"
@@ -225,24 +224,23 @@
                                            TextAlignment="Center"
                                            FontWeight="Bold"
                                            Foreground="White"></TextBlock>
-                                </StackPanel>
                             </StackPanel>
-                            <StackPanel VerticalAlignment="Bottom"
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Bottom"
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Center">
-                                    <Button Content="Изменить"
+                            <Button Content="Изменить"
                                             Style="{StaticResource CommonButton}"
                                             Name="BtnModifyTradingArea"
                                             Click="BtnModifyTradingArea_Click"></Button>
-                                    <Button Content="Удалить"
+                            <Button Content="Удалить"
                                             Style="{StaticResource CommonButton}"
                                             Name="BtnDeleteTradingArea"
                                             Click="BtnDeleteTradingArea_Click"></Button>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
