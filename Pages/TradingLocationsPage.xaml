@@ -46,12 +46,21 @@
                              MaxLength="2"
                                  TextChanged="MaxAreaInSquareMeters_TextChanged"></TextBox>
                     </StackPanel>
-                    <CheckBox Content="Кондиционер"
+                    <StackPanel>
+                        
+                    <CheckBox Content="С кондиционером"
                               IsChecked="True"
                               VerticalAlignment="Center"
                               Name="IsAirVenting"
                               Checked="IsAirVenting_Checked"
                               Unchecked="IsAirVenting_Unchecked"></CheckBox>
+                        <CheckBox Content="Без кондиционера"
+                              IsChecked="True"
+                              VerticalAlignment="Center"
+                              Name="FalseThatIsAirVenting"
+                              Checked="FalseThatIsAirVenting_Checked"
+                              Unchecked="FalseThatIsAirVenting_Unchecked"></CheckBox>
+                    </StackPanel>
                     <Button Content="Очистить"
                             Style="{StaticResource CommonButton}"
                             Width="auto"

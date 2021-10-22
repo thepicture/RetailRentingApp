@@ -41,16 +41,15 @@ namespace RetailRentingApp.Pages
         {
             if (!string.IsNullOrWhiteSpace(NameBox.Text))
             {
-                currentTradingLocations = currentTradingLocations
-                    .Where(t => t.Name.ToLower()
-                    .Contains(NameBox.Text.ToLower())).ToList();
+                _ = currentTradingLocations.RemoveAll(t => !t.Name.ToLower()
+                      .Contains(NameBox.Text.ToLower()));
             }
 
             if (!string.IsNullOrWhiteSpace(FloorBox.Text) &&
                 int.TryParse(FloorBox.Text, out _))
             {
-                currentTradingLocations = currentTradingLocations
-                   .Where(t => t.Floor == int.Parse(FloorBox.Text)).ToList();
+                _ = currentTradingLocations.RemoveAll(t => t.Floor !=
+                  int.Parse(FloorBox.Text));
             }
 
             if (!string.IsNullOrWhiteSpace(MinAreaInSquareMeters.Text) &&
@@ -58,14 +57,13 @@ namespace RetailRentingApp.Pages
                 int.TryParse(MinAreaInSquareMeters.Text, out _) &&
                 int.TryParse(MaxAreaInSquareMeters.Text, out _))
             {
-                currentTradingLocations = currentTradingLocations
-                    .Where(t => t.AreaInSquareMeters < int.Parse(MaxAreaInSquareMeters.Text) &&
-                    t.AreaInSquareMeters > int.Parse(MinAreaInSquareMeters.Text)).ToList();
+                _ = currentTradingLocations.RemoveAll(t => !(t.AreaInSquareMeters <
+                 int.Parse(MaxAreaInSquareMeters.Text) &&
+                      t.AreaInSquareMeters > int.Parse(MinAreaInSquareMeters.Text)));
             }
 
-            currentTradingLocations = currentTradingLocations
-                .Where(t => t.IsAirVenting == IsAirVenting.IsChecked)
-                .ToList();
+            _ = currentTradingLocations.RemoveAll(t => t.IsAirVenting !=
+              IsAirVenting.IsChecked && t.IsAirVenting == FalseThatIsAirVenting.IsChecked);
         }
 
         private void InitSingletoneOverwhelmer()
@@ -117,6 +115,7 @@ namespace RetailRentingApp.Pages
             MinAreaInSquareMeters.Text = null;
             MaxAreaInSquareMeters.Text = null;
             IsAirVenting.IsChecked = true;
+            FalseThatIsAirVenting.IsChecked = true;
             UpdateListView();
         }
 
@@ -160,6 +159,16 @@ namespace RetailRentingApp.Pages
         }
 
         private void IsAirVenting_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UpdateListView();
+        }
+
+        private void FalseThatIsAirVenting_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateListView();
+        }
+
+        private void FalseThatIsAirVenting_Unchecked(object sender, RoutedEventArgs e)
         {
             UpdateListView();
         }
