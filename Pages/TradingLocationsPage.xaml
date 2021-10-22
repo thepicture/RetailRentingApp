@@ -61,6 +61,11 @@
                               Checked="FalseThatIsAirVenting_Checked"
                               Unchecked="FalseThatIsAirVenting_Unchecked"></CheckBox>
                     </StackPanel>
+                    <TextBlock Text="{Binding ElementName=LViewTradingLocations, Path=Items.Count, StringFormat={}Выведено {0} записей}"
+                           HorizontalAlignment="Right"
+                           Margin="5"
+                           Style="{StaticResource CommonBlock}"
+                           FontSize="20"></TextBlock>
                     <Button Content="Очистить"
                             Style="{StaticResource CommonButton}"
                             Width="auto"
