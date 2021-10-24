@@ -20,7 +20,7 @@ namespace RetailRentingApp
 
             DataContext = AppData.Context.Users.ToList();
 
-            PBoxPasswordSecure.Focus();
+            _ = PBoxPasswordSecure.Focus();
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace RetailRentingApp
 
         private void ShowSomethingWentWrongMessage()
         {
-            MessageBox.Show("Неверный пароль. Пожалуйста, введите корректный пароль",
+            _ = MessageBox.Show("Неверный пароль. Пожалуйста, введите корректный пароль",
                      "Ошибка авторизации",
                      MessageBoxButton.OK,
                      MessageBoxImage.Warning);
@@ -133,7 +133,7 @@ namespace RetailRentingApp
             TBoxPasswordInsecure.Text = PBoxPasswordSecure.Password;
             PBoxPasswordSecure.Visibility = Visibility.Collapsed;
             TBoxPasswordInsecure.Visibility = Visibility.Visible;
-            TBoxPasswordInsecure.Focus();
+            _ = TBoxPasswordInsecure.Focus();
         }
 
         private void RevealPassword()
@@ -141,7 +141,7 @@ namespace RetailRentingApp
             PBoxPasswordSecure.Password = TBoxPasswordInsecure.Text;
             TBoxPasswordInsecure.Visibility = Visibility.Collapsed;
             PBoxPasswordSecure.Visibility = Visibility.Visible;
-            PBoxPasswordSecure.Focus();
+            _ = PBoxPasswordSecure.Focus();
         }
 
         /// <summary>
@@ -151,10 +151,10 @@ namespace RetailRentingApp
         {
             RegistrationWindow regWindow = GetRegistrationWindow();
 
-            regWindow.ShowDialog();
+            Hide();
+            _ = regWindow.ShowDialog();
             UpdateLoginBox();
 
-            Hide();
         }
 
         private RegistrationWindow GetRegistrationWindow()

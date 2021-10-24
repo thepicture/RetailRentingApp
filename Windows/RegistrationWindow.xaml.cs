@@ -81,26 +81,36 @@ namespace RetailRentingApp.Windows
 
             User user = CreateNewUser(credentials);
 
-            AppData.Context.Users.Add(user);
+            _ = AppData.Context.Users.Add(user);
         }
 
         private void CheckIfPasswordsAreCorrect(StringBuilder errorsBuilder)
         {
-            if (string.IsNullOrEmpty(PBoxFirstPassword.Password)
-                            || string.IsNullOrEmpty(PBoxPasswordSecond.Password)
-                            || PBoxFirstPassword.Password != PBoxPasswordSecond.Password)
+            if (IsPasswordIncorrect())
             {
-                errorsBuilder.AppendLine("Первый пароль должен совпадать со вторым,\n" +
+                _ = errorsBuilder.AppendLine("Первый пароль должен совпадать со вторым,\n" +
                     "пустые пароли не допускаются");
             }
         }
 
+        private bool IsPasswordIncorrect()
+        {
+            return string.IsNullOrEmpty(PBoxFirstPassword.Password)
+                                        || string.IsNullOrEmpty(PBoxPasswordSecond.Password)
+                                        || PBoxFirstPassword.Password != PBoxPasswordSecond.Password;
+        }
+
         private void CheckIfFullNameIsNotEmpty(StringBuilder errorsBuilder)
         {
-            if (string.IsNullOrEmpty(TBoxFullName.Text))
+            if (FullNameIsIncorrect())
             {
-                errorsBuilder.AppendLine("ФИО не может быть пустым");
+                _ = errorsBuilder.AppendLine("ФИО не может быть пустым");
             }
+        }
+
+        private bool FullNameIsIncorrect()
+        {
+            return string.IsNullOrEmpty(TBoxFullName.Text);
         }
 
         private void TryCatchSaveChanges()
@@ -117,8 +127,8 @@ namespace RetailRentingApp.Windows
 
         private void TryToSaveChanges()
         {
-            AppData.Context.SaveChanges();
-            MessageBox.Show("Данные успешно сохранены!");
+            _ = AppData.Context.SaveChanges();
+            _ = MessageBox.Show("Данные успешно сохранены!");
             AbstractClose();
         }
 
