@@ -85,8 +85,6 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Styles for buttons.-->
                     <Grid Grid.Row="0">
@@ -111,13 +109,9 @@
                                 Click="BtnGoToRentsPage_Click">Аренда</Button>
                     </Grid>
                     <Grid Grid.Row="4">
-                        <Button Style="{StaticResource MainUserWindowButton}">Оплата</Button>
-                    </Grid>
-                    <Grid Grid.Row="5" Background="LightGray">
-                        <Button Style="{StaticResource MainUserWindowButton}">Клиенты</Button>
-                    </Grid>
-                    <Grid Grid.Row="6">
-                        <Button Style="{StaticResource MainUserWindowButton}">Отчёт по долгу клиентов</Button>
+                        <Button Style="{StaticResource MainUserWindowButton}"
+                                Name="BtnGoToRentsChartPage"
+                                Click="BtnGoToRentsChartPage_Click">График оборота аренд</Button>
                     </Grid>
                 </Grid>
             </Grid>

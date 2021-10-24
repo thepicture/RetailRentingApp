@@ -54,5 +54,15 @@ namespace RetailRentingApp.Pages
         {
             _ = AppData.MainFrame.Navigate(new RentsPage());
         }
+
+        private void BtnGoToRentsChartPage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenRentsChartPage();
+        }
+
+        private void OpenRentsChartPage()
+        {
+            _ = AppData.MainFrame.Navigate(new RentsChartPage());
+        }
     }
 }
