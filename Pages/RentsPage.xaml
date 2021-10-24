@@ -23,15 +23,16 @@
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Клиент"
                            Width="auto"
                            Style="{StaticResource CommonBlock}"></TextBlock>
                 <ComboBox Name="ComboCustomer"
                           DisplayMemberPath="CompanyName"
-                          SelectedIndex="0"></ComboBox>
+                          SelectedIndex="0"
+                          SelectionChanged="ComboCustomer_SelectionChanged"></ComboBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Аренда"
                            Width="auto"
                            Style="{StaticResource CommonBlock}"></TextBlock>
@@ -39,8 +40,22 @@
                           DisplayMemberPath="TradingArea.Name"
                           SelectedIndex="0"></ComboBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Сохранить изменения"
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="С"
+                           Margin="5"
+                           VerticalAlignment="Center"></TextBlock>
+                <DatePicker IsTodayHighlighted="True"
+                            Margin="5"
+                            Name="FromPicker"></DatePicker>
+                <TextBlock Text="по"
+                           Margin="5"
+                           VerticalAlignment="Center"></TextBlock>
+                <DatePicker IsTodayHighlighted="True"
+                            Margin="5"
+                            Name="ToPicker"></DatePicker>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Добавить аренду"
                         Name="BtnSaveRenting"
                         Click="BtnSaveRenting_Click"></Button>
             </StackPanel>

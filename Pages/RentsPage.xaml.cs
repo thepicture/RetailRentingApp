@@ -3,17 +3,8 @@ using RetailRentingApp.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RetailRentingApp.Pages
 {
@@ -22,7 +13,7 @@ namespace RetailRentingApp.Pages
     /// </summary>
     public partial class RentsPage : Page
     {
-        private List<RentingOfTradingArea> currentRentings = new List<RentingOfTradingArea>();
+        private readonly List<RentingOfTradingArea> currentRentings = new List<RentingOfTradingArea>();
         private ListViewOverwhelmer<RentingOfTradingArea> overwhelmer;
         public RentsPage()
         {
@@ -33,7 +24,18 @@ namespace RetailRentingApp.Pages
         private void InitComboBoxes()
         {
             ComboCustomer.ItemsSource = AppData.Context.Customers.ToList();
-            ComboRenting.ItemsSource = currentRentings;
+            AssignAppropriateRentingsForUser();
+        }
+
+        private void AssignAppropriateRentingsForUser()
+        {
+            ComboRenting.ItemsSource = AppData
+                .Context
+                .RentingOfTradingAreas
+                .ToList()
+                .Where(r => r.Renting.ClientId !=
+                (ComboCustomer.SelectedItem as Customer)
+                .Id);
         }
 
         private void RentsPageView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -72,12 +74,64 @@ namespace RetailRentingApp.Pages
 
         private void BtnDeleteRenting_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+            object buttonContext = button.DataContext;
+            RentingOfTradingArea deletingArea = buttonContext as RentingOfTradingArea;
 
+            bool userWantsToDeleteArea = SimpleMessager
+                .ShowQuestion("Действительно удалить " +
+                "аренду для торговой точки " +
+                            $"{deletingArea.TradingArea.Name}?");
+
+            if (userWantsToDeleteArea)
+            {
+                AppData.Context.Entry(deletingArea).State = System.Data
+                    .Entity.EntityState.Deleted;
+                try
+                {
+                    _ = AppData.Context.SaveChanges();
+                    SimpleMessager.ShowInfo("Аренда торговой точки " +
+                        "успешно удалена!");
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+                    UpdateListView();
+                }
+                catch (Exception ex)
+                {
+                    SimpleMessager.ShowError("Не удалось удалить аренду. " +
+                        "Пожалуйста, попробуйте ещё раз. Ошибка: " + ex.Message);
+                }
+            }
         }
 
         private void BtnSaveRenting_Click(object sender, RoutedEventArgs e)
         {
+            RentingOfTradingArea rentingOfTradingArea = new RentingOfTradingArea
+            {
+                Renting = (ComboRenting.SelectedItem as RentingOfTradingArea).Renting,
+                StartDate = (DateTime)FromPicker.SelectedDate,
+                EndDate = (DateTime)ToPicker.SelectedDate,
+                TradingArea = (ComboRenting.SelectedItem as RentingOfTradingArea).TradingArea
+            };
 
+            _ = AppData.Context.RentingOfTradingAreas.Add(rentingOfTradingArea);
+
+            try
+            {
+                _ = AppData.Context.SaveChanges();
+                SimpleMessager.ShowInfo("Аренда успешно добавлена!");
+                AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+                UpdateListView();
+            }
+            catch (Exception ex)
+            {
+                SimpleMessager.ShowError("Не удалось добавить аренду. " +
+                    "Пожалуйста, попробуйте ещё раз. Ошибка: " + ex.Message);
+            }
+        }
+
+        private void ComboCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AssignAppropriateRentingsForUser();
         }
     }
 }
