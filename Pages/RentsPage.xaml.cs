@@ -3,6 +3,7 @@ using RetailRentingApp.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -105,6 +106,25 @@ namespace RetailRentingApp.Pages
 
         private void BtnSaveRenting_Click(object sender, RoutedEventArgs e)
         {
+            StringBuilder errorsBuilder = new StringBuilder();
+
+            CheckCustomersComboBox(errorsBuilder);
+            CheckRentingsComboBox(errorsBuilder);
+            CheckIfDatesAreValid(errorsBuilder);
+
+            bool hasAnyErrors = errorsBuilder.Length > 0;
+
+            if (hasAnyErrors)
+            {
+                SimpleMessager.ShowError(errorsBuilder.ToString());
+                return;
+            }
+
+            SaveTradingArea();
+        }
+
+        private void SaveTradingArea()
+        {
             RentingOfTradingArea rentingOfTradingArea = new RentingOfTradingArea
             {
                 Renting = (ComboRenting.SelectedItem as RentingOfTradingArea).Renting,
@@ -114,7 +134,11 @@ namespace RetailRentingApp.Pages
             };
 
             _ = AppData.Context.RentingOfTradingAreas.Add(rentingOfTradingArea);
+            TryToUpdateDbContext();
+        }
 
+        private void TryToUpdateDbContext()
+        {
             try
             {
                 _ = AppData.Context.SaveChanges();
@@ -126,6 +150,37 @@ namespace RetailRentingApp.Pages
             {
                 SimpleMessager.ShowError("Не удалось добавить аренду. " +
                     "Пожалуйста, попробуйте ещё раз. Ошибка: " + ex.Message);
+            }
+        }
+
+        private void CheckIfDatesAreValid(StringBuilder errorsBuilder)
+        {
+            if (DateIsInvalid())
+            {
+                _ = errorsBuilder.AppendLine("Укажите корректные даты начала и окончания");
+            }
+        }
+
+        private bool DateIsInvalid()
+        {
+            return FromPicker.SelectedDate is null ||
+                            ToPicker.SelectedDate is null ||
+                            FromPicker.SelectedDate >= ToPicker.SelectedDate;
+        }
+
+        private void CheckRentingsComboBox(StringBuilder errorsBuilder)
+        {
+            if (ComboRenting.SelectedItem is null)
+            {
+                _ = errorsBuilder.AppendLine("Укажите аренду для клиента");
+            }
+        }
+
+        private void CheckCustomersComboBox(StringBuilder errorsBuilder)
+        {
+            if (ComboCustomer.SelectedItem is null)
+            {
+                _ = errorsBuilder.AppendLine("Укажите клиента для аренды");
             }
         }
 
