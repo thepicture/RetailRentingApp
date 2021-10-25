@@ -22,13 +22,23 @@ namespace RetailRentingApp.Pages
 
         private void FullfillComboCustomers()
         {
-            ComboCustomers.ItemsSource = AppData
-                .Context
-                .Customers.ToList();
+            InsertComboCustomers();
+            SelectItemForComboCustomer();
+        }
+
+        private void SelectItemForComboCustomer()
+        {
             ComboCustomers.SelectedItem = AppData
-                .Context
-                .RentingOfTradingAreas
-                .Find(_renting.Id).Renting.Customer;
+                            .Context
+                            .RentingOfTradingAreas
+                            .Find(_renting.Id).Renting.Customer;
+        }
+
+        private void InsertComboCustomers()
+        {
+            ComboCustomers.ItemsSource = AppData
+                            .Context
+                            .Customers.ToList();
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -38,12 +48,19 @@ namespace RetailRentingApp.Pages
 
         private void BtnAddContract_Click(object sender, RoutedEventArgs e)
         {
-            if (ComboCustomers.SelectedItem is null)
+            bool noCustomerIsSpecified = ComboCustomers.SelectedItem is null;
+
+            if (noCustomerIsSpecified)
             {
                 ShowNoClientSpecifiedError();
                 return;
             }
 
+            UpdateCustomerAndSaveChanges();
+        }
+
+        private void UpdateCustomerAndSaveChanges()
+        {
             UpdateCustomerOfRenting();
             TryToSaveChanges();
         }
