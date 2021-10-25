@@ -41,27 +41,43 @@ namespace RetailRentingApp.Pages
 
         private void RentsPageView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (Visibility == Visibility.Visible)
+            if (PageIsVisible())
             {
-                AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
-                UpdateListView();
+                ReloadAndInfluteLView();
             }
+        }
+
+        private bool PageIsVisible()
+        {
+            return Visibility == Visibility.Visible;
         }
 
         private void UpdateListView()
         {
-            if (LViewCustomerRentings == null)
+            if (LViewIsNotInitialized())
             {
                 return;
             }
+            InitRents();
+        }
 
+        private bool LViewIsNotInitialized()
+        {
+            return LViewCustomerRentings == null;
+        }
+
+        private void InitRents()
+        {
+            UpdateLViewItems();
+            InitSingletoneOverwhelmer();
+            overwhelmer.Overwhelm();
+        }
+
+        private void UpdateLViewItems()
+        {
             LViewCustomerRentings.Items.Clear();
             currentRentings.Clear();
             currentRentings.AddRange(AppData.Context.RentingOfTradingAreas.ToList());
-
-            InitSingletoneOverwhelmer();
-
-            overwhelmer.Overwhelm();
         }
 
         private void InitSingletoneOverwhelmer()
@@ -78,49 +94,89 @@ namespace RetailRentingApp.Pages
             Button button = sender as Button;
             object buttonContext = button.DataContext;
             RentingOfTradingArea deletingArea = buttonContext as RentingOfTradingArea;
+            TryToDeleteArea(deletingArea);
+        }
 
-            bool userWantsToDeleteArea = SimpleMessager
-                .ShowQuestion("Действительно удалить " +
-                "аренду для торговой точки " +
-                            $"{deletingArea.TradingArea.Name}?");
-
-            if (userWantsToDeleteArea)
+        private void TryToDeleteArea(RentingOfTradingArea deletingArea)
+        {
+            if (IsUserWantsToDeleteArea(deletingArea))
             {
-                AppData.Context.Entry(deletingArea).State = System.Data
-                    .Entity.EntityState.Deleted;
-                try
-                {
-                    _ = AppData.Context.SaveChanges();
-                    SimpleMessager.ShowInfo("Аренда торговой точки " +
-                        "успешно удалена!");
-                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
-                    UpdateListView();
-                }
-                catch (Exception ex)
-                {
-                    SimpleMessager.ShowError("Не удалось удалить аренду. " +
-                        "Пожалуйста, попробуйте ещё раз. Ошибка: " + ex.Message);
-                }
+                DeleteFromDbContext(deletingArea);
+                TryToSaveChanges();
             }
+        }
+
+        private void TryToSaveChanges()
+        {
+            try
+            {
+                SaveChangesAndShowFeedback();
+                ReloadAndInfluteLView();
+            }
+            catch (Exception ex)
+            {
+                SimpleMessager.ShowError("Не удалось удалить аренду. " +
+                    "Пожалуйста, попробуйте ещё раз. Ошибка: " + ex.Message);
+            }
+        }
+
+        private void ReloadAndInfluteLView()
+        {
+            AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+            UpdateListView();
+        }
+
+        private static void SaveChangesAndShowFeedback()
+        {
+            _ = AppData.Context.SaveChanges();
+            SimpleMessager.ShowInfo("Аренда торговой точки "
+                                    + "успешно удалена!");
+        }
+
+        private static void DeleteFromDbContext(RentingOfTradingArea deletingArea)
+        {
+            AppData.Context.Entry(deletingArea).State = System.Data
+                .Entity.EntityState.Deleted;
+        }
+
+        private static bool IsUserWantsToDeleteArea(RentingOfTradingArea deletingArea)
+        {
+            return SimpleMessager.ShowQuestion("Действительно удалить "
+                                               + "аренду для торговой точки "
+                                               + $"{deletingArea.TradingArea.Name}?");
         }
 
         private void BtnSaveRenting_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder errorsBuilder = new StringBuilder();
+            if (NoErrorsFound())
+            {
+                SaveTradingArea();
+            }
+        }
 
+        private bool NoErrorsFound()
+        {
+            StringBuilder errorsBuilder = new StringBuilder();
+            CheckValuesForValidity(errorsBuilder);
+
+            if (HasAnyErrors(errorsBuilder))
+            {
+                SimpleMessager.ShowError(errorsBuilder.ToString());
+                return true;
+            }
+            return false;
+        }
+
+        private static bool HasAnyErrors(StringBuilder errorsBuilder)
+        {
+            return errorsBuilder.Length > 0;
+        }
+
+        private void CheckValuesForValidity(StringBuilder errorsBuilder)
+        {
             CheckCustomersComboBox(errorsBuilder);
             CheckRentingsComboBox(errorsBuilder);
             CheckIfDatesAreValid(errorsBuilder);
-
-            bool hasAnyErrors = errorsBuilder.Length > 0;
-
-            if (hasAnyErrors)
-            {
-                SimpleMessager.ShowError(errorsBuilder.ToString());
-                return;
-            }
-
-            SaveTradingArea();
         }
 
         private void SaveTradingArea()
@@ -141,16 +197,20 @@ namespace RetailRentingApp.Pages
         {
             try
             {
-                _ = AppData.Context.SaveChanges();
-                SimpleMessager.ShowInfo("Аренда успешно добавлена!");
-                AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
-                UpdateListView();
+                AddRentAndShowFeedback();
+                ReloadAndInfluteLView();
             }
             catch (Exception ex)
             {
                 SimpleMessager.ShowError("Не удалось добавить аренду. " +
                     "Пожалуйста, попробуйте ещё раз. Ошибка: " + ex.Message);
             }
+        }
+
+        private static void AddRentAndShowFeedback()
+        {
+            _ = AppData.Context.SaveChanges();
+            SimpleMessager.ShowInfo("Аренда успешно добавлена!");
         }
 
         private void CheckIfDatesAreValid(StringBuilder errorsBuilder)
