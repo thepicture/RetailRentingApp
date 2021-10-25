@@ -32,25 +32,32 @@ namespace RetailRentingApp.Pages
 
         private void UpdateListView()
         {
+            UpdateCurrentLViewItems();
+            CheckDateAndFindLocations();
+            RemoveLocationsWithoutRent();
+            InitSingletoneOverwhelmer();
+            overwhelmer.Overwhelm();
+        }
+
+        private void UpdateCurrentLViewItems()
+        {
             LViewTradingAreas.Items.Clear();
             currentRentings.Clear();
             currentRentings.AddRange(AppData.Context.RentingOfTradingAreas.ToList());
-
-            CheckDateAndFindLocations();
-            RemoveLocationsWithoutRent();
-
-            InitSingletoneOverwhelmer();
-
-            overwhelmer.Overwhelm();
         }
 
         private void InitSingletoneOverwhelmer()
         {
-            if (overwhelmer == null)
+            if (IsOverwhelmerExists())
             {
                 overwhelmer = new ListViewOverwhelmer<RentingOfTradingArea>(LViewTradingAreas,
                                                                             currentRentings);
             }
+        }
+
+        private bool IsOverwhelmerExists()
+        {
+            return overwhelmer == null;
         }
 
         private void RemoveLocationsWithoutRent()
@@ -68,12 +75,22 @@ namespace RetailRentingApp.Pages
 
         private void CheckDateAndFindLocations()
         {
-            if (DateValidationChecker.IsDateIntervalValid(FromPicker, ToPicker))
+            if (DatesAreValid())
             {
-                LocationsInGivenTimeIntervalUtils.FindLocationsInGivenDateInterval(currentRentings,
-                                                                                   FromPicker,
-                                                                                   ToPicker);
+                FindLocationsInGivenDateInterval();
             }
+        }
+
+        private void FindLocationsInGivenDateInterval()
+        {
+            LocationsInGivenTimeIntervalUtils.FindLocationsInGivenDateInterval(currentRentings,
+                                                                               FromPicker,
+                                                                               ToPicker);
+        }
+
+        private bool DatesAreValid()
+        {
+            return DateValidationChecker.IsDateIntervalValid(FromPicker, ToPicker);
         }
 
         private void BtnClearDates_Click(object sender, RoutedEventArgs e)
@@ -83,11 +100,21 @@ namespace RetailRentingApp.Pages
         }
         private void RentTradingLocations_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (Visibility == Visibility.Visible)
+            if (PageIsVisible())
             {
-                AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
-                UpdateListView();
+                UpdateAndInfluteLView();
             }
+        }
+
+        private void UpdateAndInfluteLView()
+        {
+            AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+            UpdateListView();
+        }
+
+        private bool PageIsVisible()
+        {
+            return Visibility == Visibility.Visible;
         }
     }
 }
