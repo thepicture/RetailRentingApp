@@ -8,7 +8,7 @@ namespace RetailRentingApp.Classes
 {
     public class ListViewOverwhelmer<T>
     {
-        private IList<T> collection;
+        private readonly IList<T> collection;
         private IList<T> clearingCollection;
         private readonly ItemsControl itemsControl;
         private readonly DispatcherTimer timer;
