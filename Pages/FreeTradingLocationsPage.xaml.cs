@@ -22,18 +22,21 @@ namespace RetailRentingApp.Pages
 
         private void InitSingletoneOverwhelmer()
         {
-            if (overwhelmer == null)
+            if (OverwhelmerIsNotInitialized())
             {
                 overwhelmer = new ListViewOverwhelmer<RentingOfTradingArea>(LViewTradingAreas,
                                                                             currentRentings);
             }
         }
 
+        private bool OverwhelmerIsNotInitialized()
+        {
+            return overwhelmer == null;
+        }
+
         private void UpdateListView()
         {
-            LViewTradingAreas.Items.Clear();
-            currentRentings.Clear();
-            currentRentings.AddRange(AppData.Context.RentingOfTradingAreas.ToList());
+            UpdateCurrentItems();
 
             CheckDateAndFindLocations();
             RemoveLocationsWithRent();
@@ -41,6 +44,13 @@ namespace RetailRentingApp.Pages
             InitSingletoneOverwhelmer();
 
             overwhelmer.Overwhelm();
+        }
+
+        private void UpdateCurrentItems()
+        {
+            LViewTradingAreas.Items.Clear();
+            currentRentings.Clear();
+            currentRentings.AddRange(AppData.Context.RentingOfTradingAreas.ToList());
         }
 
         private void RemoveLocationsWithRent()
@@ -56,12 +66,22 @@ namespace RetailRentingApp.Pages
 
         private void CheckDateAndFindLocations()
         {
-            if (DateValidationChecker.IsDateIntervalValid(FromPicker, ToPicker))
+            if (DatesAreValid())
             {
-                LocationsInGivenTimeIntervalUtils.FindLocationsInGivenDateInterval(currentRentings,
-                                                                                   FromPicker,
-                                                                                   ToPicker);
+                FindLocationsInGivenInterval();
             }
+        }
+
+        private void FindLocationsInGivenInterval()
+        {
+            LocationsInGivenTimeIntervalUtils.FindLocationsInGivenDateInterval(currentRentings,
+                                                                                               FromPicker,
+                                                                                               ToPicker);
+        }
+
+        private bool DatesAreValid()
+        {
+            return DateValidationChecker.IsDateIntervalValid(FromPicker, ToPicker);
         }
 
         private void FromPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
