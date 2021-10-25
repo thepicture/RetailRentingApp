@@ -14,9 +14,31 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+            <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Тип диаграммы" Margin="5"></TextBlock>
-                <ComboBox Name="ComboChartType" SelectedIndex="0" SelectionChanged="ChartType_SelectionChanged"></ComboBox>
+
+                    <TextBlock Text="Тип диаграммы" Margin="5"></TextBlock>
+                    <ComboBox Name="ComboChartType" 
+                          SelectionChanged="ChartType_SelectionChanged"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Показывать значения с периода"
+                               Margin="5"
+                               VerticalAlignment="Center"></TextBlock>
+                    <DatePicker Name="DatePickerFrom" 
+                                IsTodayHighlighted="True"
+                                SelectedDateChanged="DatePickerFrom_SelectedDateChanged"></DatePicker>
+                    <TextBlock Text="по период"
+                               Margin="5"
+                               VerticalAlignment="Center"></TextBlock>
+                    <DatePicker Name="DatePickerTo"
+                                SelectedDateChanged="DatePickerTo_SelectedDateChanged"></DatePicker>
+                    <Button Content="Сбросить значения"
+                            Width="auto"
+                            Height="20"
+                            Name="BtnClearFiltration"
+                            Click="BtnClearFiltration_Click"></Button>
+                </StackPanel>
             </StackPanel>
             <Grid Grid.Row="1">
                 <WindowsFormsHost>

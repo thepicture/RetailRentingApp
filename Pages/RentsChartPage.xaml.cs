@@ -24,6 +24,7 @@ namespace RetailRentingApp.Pages
         private void OverwhelmComboChartTypes()
         {
             ComboChartType.ItemsSource = Enum.GetValues(typeof(SeriesChartType));
+            ComboChartType.SelectedItem = SeriesChartType.RangeColumn;
         }
 
         private void InitChart()
@@ -31,7 +32,7 @@ namespace RetailRentingApp.Pages
             ChartRentsUsability.ChartAreas
                             .Add(new ChartArea("RentsUsability"));
 
-            Series series = new Series("MainSeries")
+            Series series = new Series("Оборот торговых точек")
             {
                 IsValueShownAsLabel = true
             };
@@ -50,12 +51,39 @@ namespace RetailRentingApp.Pages
             Series chartSeries = ChartRentsUsability.Series.First();
             chartSeries.Points.Clear();
             chartSeries.ChartType = chartType;
-
             List<RentingOfTradingArea> areas = AppData.Context.RentingOfTradingAreas.ToList();
-            foreach(RentingOfTradingArea area  in areas)
+
+            bool datesAreValid = DateValidationChecker.IsDateIntervalValid(DatePickerFrom, DatePickerTo);
+
+            if (datesAreValid)
             {
-                _ = chartSeries.Points.AddXY(area.Renting.Customer.CompanyName + ", " + area.TradingArea.Name, 20);
+                areas = areas.Where(a => a.StartDate > DatePickerFrom.SelectedDate &&
+                a.EndDate < DatePickerTo.SelectedDate).ToList();
             }
+
+            var mappedAreas = areas.Select(a => new { a.TradingArea.Name }).Distinct().ToList();
+
+            foreach (var area in mappedAreas)
+            {
+                _ = chartSeries.Points.AddXY(area.Name,
+                                             areas.Count(a => a.TradingArea.Name.Equals(area.Name)));
+            }
+        }
+
+        private void DatePickerFrom_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateChart();
+        }
+
+        private void DatePickerTo_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateChart();
+        }
+
+        private void BtnClearFiltration_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DatePickerFrom.SelectedDate = DatePickerTo.SelectedDate = null;
+            UpdateChart();
         }
     }
 }
