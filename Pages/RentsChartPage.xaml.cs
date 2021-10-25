@@ -31,13 +31,22 @@ namespace RetailRentingApp.Pages
         {
             ChartRentsUsability.ChartAreas
                             .Add(new ChartArea("RentsUsability"));
+            InitAndAddSeries();
+        }
 
-            Series series = new Series("Оборот торговых точек")
+        private void InitAndAddSeries()
+        {
+            Series series = GetInitializedSeries();
+
+            ChartRentsUsability.Series.Add(series);
+        }
+
+        private static Series GetInitializedSeries()
+        {
+            return new Series("Оборот торговых точек")
             {
                 IsValueShownAsLabel = true
             };
-
-            ChartRentsUsability.Series.Add(series);
         }
 
         private void ChartType_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,12 +56,27 @@ namespace RetailRentingApp.Pages
 
         private void UpdateChart()
         {
-            SeriesChartType chartType = (SeriesChartType)ComboChartType.SelectedItem;
-            Series chartSeries = ChartRentsUsability.Series.First();
-            chartSeries.Points.Clear();
-            chartSeries.ChartType = chartType;
+            Series chartSeries = GetInitializedChart();
             List<RentingOfTradingArea> areas = AppData.Context.RentingOfTradingAreas.ToList();
+            areas = GetAreas(areas);
+            InfluteChart(chartSeries, areas);
+        }
 
+        private static void InfluteChart(Series chartSeries, List<RentingOfTradingArea> areas)
+        {
+            var mappedAreas = areas.Select(a => new { a.TradingArea.Name })
+                .Distinct()
+                .ToList();
+
+            foreach (var area in mappedAreas)
+            {
+                _ = chartSeries.Points.AddXY(area.Name,
+                                             areas.Count(a => a.TradingArea.Name.Equals(area.Name)));
+            }
+        }
+
+        private List<RentingOfTradingArea> GetAreas(List<RentingOfTradingArea> areas)
+        {
             bool datesAreValid = DateValidationChecker.IsDateIntervalValid(DatePickerFrom, DatePickerTo);
 
             if (datesAreValid)
@@ -61,13 +85,16 @@ namespace RetailRentingApp.Pages
                 a.EndDate < DatePickerTo.SelectedDate).ToList();
             }
 
-            var mappedAreas = areas.Select(a => new { a.TradingArea.Name }).Distinct().ToList();
+            return areas;
+        }
 
-            foreach (var area in mappedAreas)
-            {
-                _ = chartSeries.Points.AddXY(area.Name,
-                                             areas.Count(a => a.TradingArea.Name.Equals(area.Name)));
-            }
+        private Series GetInitializedChart()
+        {
+            SeriesChartType chartType = (SeriesChartType)ComboChartType.SelectedItem;
+            Series chartSeries = ChartRentsUsability.Series.First();
+            chartSeries.ChartType = chartType;
+            chartSeries.Points.Clear();
+            return chartSeries;
         }
 
         private void DatePickerFrom_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
