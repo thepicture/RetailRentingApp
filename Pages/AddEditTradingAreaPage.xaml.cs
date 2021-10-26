@@ -19,11 +19,6 @@ namespace RetailRentingApp.Pages
         public AddEditTradingAreaPage(TradingArea tradingArea)
         {
             InitializeComponent();
-            SetDataContext(tradingArea);
-        }
-
-        private void SetDataContext(TradingArea tradingArea)
-        {
             InitTradingArea(tradingArea);
             DataContext = _tradingArea;
         }
