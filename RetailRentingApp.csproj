@@ -279,6 +279,10 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Screenshots\AuthorizationWindow.png" />
+    <Resource Include="Screenshots\MainWindow.png" />
+    <Resource Include="Screenshots\RegisterWindow.png" />
+    <Resource Include="Screenshots\TradingLocationsWindow.png" />
     <Resource Include="Resources\noImagePurple.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
