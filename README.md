@@ -1,10 +1,24 @@
 # RetailRentingApp
 A college project
 
-# Installing
+## Installing
 
-Copy database from VS project and insert it into MS SQL Server, create an user with login and password in the DBMS. Then run it.
+- Copy the database from VS project 
+- Insert it into the MS SQL Server
+- Create an user with a login and a password in the DBMS. 
+- Run the app.
 
-# Frameworks
+## Screenshots
+### Login window
+![Login window](/Screenshots/AuthorizationWindow.png)
+### Registration window
+![Registration window](/Screenshots/RegisterWindow.png)
+### Main window
+![Main window](/Screenshots/MainWindow.png)
+### Trading locations window
+![Trading locations window](/Screenshots/TradingLocationsWindow.png)
 
-Entity Framework
+## Frameworks
+- ADO.NET
+- .NET Framework
+- Entity Framework
